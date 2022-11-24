@@ -1,0 +1,137 @@
+@import "../../../assets/_variables.scss";
+
+// .nav li{
+//     list-style-type: none;
+//     padding-left: 37px;
+//     margin-top: 13px;
+//     margin-bottom: 18px;
+
+// }
+// .nav li a{
+//   text-decoration: none;
+//   color: $header-color;
+//   text-transform: capitalize;
+//   font-size: 16px;
+//   font-weight: $font-weight-header;
+//   letter-spacing: .05px;
+//   font-family: $font-family;
+//   transition: all 0.3s ease;
+//   -webkit-transition: all 0.3s ease;
+
+// }
+// .nav li a:not(.active):hover{
+//   padding-left: 8px;
+// }
+// .hr{
+//      margin-bottom: 20px;
+//      border: 1px solid #e5e2e7;
+// }
+// .icons {
+//   padding-right: 19px;
+//   font-weight: $font-weight-header;
+
+// }
+// :host::ng-deep{
+//   .pi{
+//     font-size: 20px;
+//     color: $primary-color;
+//   }
+// }
+// //sidebar
+// :host::ng-deep{
+//   .p-sidebar .p-sidebar-header{
+//     padding: 3px;
+//   }
+//   .logo-section{
+//     display: flex;
+//     justify-content: start;
+//   }
+//   .title span{
+//     font-weight: $font-weight-header;
+//     color: $header-color;
+//     font-family: $font-family;
+//     margin-left: 16px;
+//     font-size: 23px;
+//   }
+//   .p-sidebar .p-sidebar-header .p-sidebar-close, .p-sidebar .p-sidebar-header .p-sidebar-icon{
+//     display: none;
+//   }
+// }
+/*start asidebar */
+.asidebar{
+  width: 270px;
+  background-color: #fdf9ff;
+  position: fixed;
+  height: 100%;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  border-right: 1px solid #e8dfec;
+  padding: 30px;
+  transition:  all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+}
+
+.logo{
+ margin-top: -19px;
+}
+.logo img{
+  margin-left:40px
+}
+.logo p{
+  color: $primary-color;
+  font-size: 35px;
+  /* font-family: 'Rubik', sans-serif; */
+  // font-weight: 700;
+  display: table-cell;
+  position: relative;
+  padding: 1px 0px;
+  line-height: 1.5;
+  font-family: cursive;
+  font-style: italic;
+}
+.img-sm img{
+  margin-left: -14px;
+}
+
+
+.nav{
+  margin: 23px 0;
+  list-style: none;
+}
+
+.nav li a{
+  margin-left: -42px;
+  display: block;
+  font-size: 16px;
+  font-weight: 900;
+  color: #302e4d;
+  line-height: 45px;
+  text-decoration: none;
+  border-bottom: 1px solid #e8dfec;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+.active{
+  color:$primary-color !important;
+  padding-left: 10px;
+
+}
+
+.nav li a i{
+  margin-right: 5px;
+}
+.asidebar-sm{
+    width: 100px;
+    background-color: #fdf9ff;
+    position: fixed;
+    height: 100%;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    border-right: 1px solid #e8dfec;
+    padding: 30px;
+    transition:  all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+}

@@ -1,0 +1,125 @@
+<form [formGroup]="rawMaterialForm" (submit)="submitAdd(rawMaterialForm.value)">
+  <div class="container-fluid">
+    <div class="grid p-fluid">
+
+      <div class="col-12 md:col-6 lg:col-3">
+        <label class="model-label model-label-form">{{'item'|translate}}</label>
+        <p-autoComplete formControlName="variant_id" [suggestions]="filteredItemVariants"
+          (completeMethod)="filterItemParent($event)" field="name" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-3">
+        <label class="model-label model-label-form">{{"raw_material_discount_type"|translate}}</label>
+        <p-selectButton [options]="" optionLabel="label" optionValue="value"
+          formControlName="raw_material_discount_type">
+        </p-selectButton>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-3">
+        <label class="model-label model-label-form">{{'items'|translate}}</label>
+        <p-autoComplete formControlName="items" [suggestions]="filteredItems" (completeMethod)="filterItems($event)"
+          field="name" [multiple]="true" (onSelect)='selectItem($event)'>
+        </p-autoComplete>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-3">
+        <label class="model-label model-label-form">{{'categories'|translate}}</label>
+        <p-autoComplete formControlName="categories" [suggestions]="filteredCategories"
+          (completeMethod)="filterCategories($event)" field="name" [multiple]="true"
+          (onSelect)='selectCategory($event)'>
+        </p-autoComplete>
+      </div>
+
+    </div>
+  </div>
+
+  <p-button class="secondary" label="Add row" (onClick)="onAddRow()"></p-button>
+
+  <!-- 
+  <div formArrayName="row_items">
+    <div class="container-fluid" *ngFor="let item of itemFormGroup.controls; let i = index;">
+      <div class="grid p-fluid" [formGroupName]="i">
+        <div class="col-2">
+          <label class="model-label model-label-form">{{'name'|translate}}</label>
+          <input [id]="'name_'+i" pInputText type="text" class="p-inputtext-md" formControlName="name" value="Name"
+            disabled="disabled">
+        </div>
+
+        <div class="col-2">
+          <label class="model-label model-label-form">{{'barcode'|translate}}</label>
+          <input [id]="'barcode_'+i" pInputText type="text" class="p-inputtext-md" formControlName="barcode"
+            value="barcode" disabled="disabled">
+        </div>
+
+        <div class="col-2">
+          <label class="model-label model-label-form">{{'available_quantity'|translate}}</label>
+          <input [id]="'available_quantity_'+i" pInputText type="text" class="p-inputtext-md"
+            formControlName="available_quantity" value="available_quantity " disabled="disabled">
+        </div>
+
+        <div class="col-1">
+          <label class="model-label model-label-form">{{'discount_quantity'|translate}}</label>
+          <input [id]="'discount_quantity_'+i" pInputText type="text" class="p-inputtext-md"
+            formControlName="discount_quantity" value="discount_quantity">
+        </div>
+
+        <div class="col-1">
+          <label class="model-label model-label-form">{{'lost_quantity'|translate}}</label>
+          <input [id]="'lost_quantity_'+i" pInputText type="text" class="p-inputtext-md" formControlName="lost_quantity"
+            value="lost_quantity">
+        </div>
+
+        <div class="col-2">
+          <label class="model-label model-label-form">{{'total'|translate}}</label>
+          <input [id]="'total_'+i" pInputText type="text" class="p-inputtext-md" formControlName="total" value="total"
+            disabled="disabled">
+        </div>
+
+        <div class="col-2">
+          <br class="model-label model-label-form">
+          <button pButton type="button" icon="pi pi-trash" class="p-button-danger"
+            (click)="removeAddressFrom(i)"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+
+
+  <!--  responsiveLayout="scroll" styleClass="p-datatable-striped" scrollHeight="400px" [responsive]="true" -->
+  <p-table [value]="card" [scrollable]="true" [resizableColumns]="true" [responsive]="true" styleClass="p-datatable-striped">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>{{'item_name' | translate}} </th>
+        <th>{{'item_barcode' | translate}} </th>
+        <th>{{'discount_quantity' | translate}} </th>
+        <th>{{'available_quantity' | translate}} </th>
+        <th>{{'lost_quantity' | translate}} </th>
+        <th>{{'total' | translate}} </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td>{{rowData.item_name}}</td>
+        <td>{{rowData.item_barcode}}</td>
+        <ng-container *ngFor="let input of rowData.inputs; let j = index">
+          <td>
+            <ng-container *ngIf="input.type === 'number'">
+              <input pInputText [value]="input.value" [disabled]="input.disabled" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+            </ng-container>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+      <div class="absolute bottom-0 right-0 p-3">
+        <p-button label="{{'save'|translate}}" [disabled]="rawMaterialForm.invalid" type="submit" icon="pi pi-save"
+          styleClass="p-button-success">
+        </p-button>
+      </div>
+    </div>
+  </div>
+</form>

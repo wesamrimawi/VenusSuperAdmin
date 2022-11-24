@@ -1,0 +1,45 @@
+<form [formGroup]="orderTypeForm" (submit)="submitAdd(orderTypeForm.value)" [dir]="'dir'|translate">
+ <div class="container-fluid">
+   <div class="grid p-fluid">
+
+     <div class="col-12 md:col-6">
+       <label class="model-label model-label-form">{{'name'|translate}}</label>
+       <input pInputText type="text" class="p-inputtext-md" formControlName="name" autofocus>
+     </div>
+
+     <div class="col-12 md:col-6">
+      <label class="model-label model-label-form">{{'service_percentage'|translate}}</label>
+      <p-inputNumber inputId="minmaxfraction"  formControlName="service_percentage"></p-inputNumber>
+     </div>
+
+    <div class="col-12 md:col-12">
+     <label class="model-label model-label-form">{{'branches'|translate}}</label>
+     <small class="p-error"
+       *ngIf="vf['branches'].errors && vf['branches'].errors['required']"><span>&nbsp;{{'*'|translate}}</span>
+     </small>
+     <p-multiSelect appendTo="body"  formControlName="branches"
+       defaultLabel="{{'branches'|translate}}" display="chip" optionLabel="name" optionValue="id">
+     </p-multiSelect>
+    </div>
+
+    <div class="col-12 md:col-12">
+     <div class="formgrid grid">
+         <div class="field-radiobutton col-4">
+           <p-inputSwitch formControlName="use_in_order_app"></p-inputSwitch>
+           <label >{{'use_in_order_app'|translate}}</label>
+         </div>
+       </div>
+     </div>
+    </div>
+
+   </div>
+   
+   <div class="grid p-fluid">
+     <div class="col-12 md:col-12 flex justify-content-end" >
+       <div class="absolute bottom-0 p-3">
+         <p-button label="{{'save'|translate}}" [disabled]="orderTypeForm.invalid" type="submit" icon="pi pi-save" styleClass="p-button-success">
+         </p-button>
+       </div>
+     </div>
+   </div>
+</form>

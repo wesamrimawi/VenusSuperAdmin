@@ -1,0 +1,209 @@
+<div class="card">
+    <div class="grid">
+        <div class="item_profile">
+            TG
+        </div>
+        <div class="col-12 md:col-12 p-0 pt-2">
+            <div class="alignleft pl-2">
+                <h6 class="m-0 ml-2"><span class="pi pi-slack"></span>&nbsp; TriesteEXTRA GUM PEPPERMINT FLAVOR</h6>
+            </div>
+            <div class="alignright pr-2">
+                <button class="p-button-rounded mr-2" pButton type="button" (click)="menu.toggle($event)"
+                    icon="pi pi-pencil"></button>
+                <p-menu #menu [popup]="true" [model]="items"></p-menu>
+            </div>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-12">
+            <p-tabView>
+                <p-tabPanel header="{{'information'|translate}}" leftIcon="pi pi-info">
+                    <div class="grid">
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'name'|translate}} : </span>
+                            <span class="info-content">TriesteEXTRA GUM PEPPERMINT FLAVOR</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'short_description'|translate}} : </span>
+                            <span class="info-content">TriesteEXTRA GUM PEPPERMINT FLAVOR</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'long_description'|translate}} : </span>
+                            <span class="info-content">TriesteEXTRA GUM PEPPERMINT FLAVOR</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'alert_information'|translate}} : </span>
+                            <span class="info-content">TriesteEXTRA GUM PEPPERMINT FLAVOR</span>
+                        </div>
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'discount_type'|translate}} : </span>
+                            <span class="info-content">Not Specified</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'discount_value'|translate}} : </span>
+                            <span class="info-content">0</span>
+                        </div>
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'max_discount_value '|translate}} : </span>
+                            <span class="info-content">0</span>
+                        </div>
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'min_sale_price'|translate}} : </span>
+                            <span class="info-content">0</span>
+                        </div>
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'commission_type'|translate}} : </span>
+                            <span class="info-content">Not Specified</span>
+                        </div>
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'commission_value'|translate}} : </span>
+                            <span class="info-content">0</span>
+                        </div>
+
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'branches'|translate}} : </span>
+                            <span class="info-content">Amman , Irbid , Zarqa</span>
+                        </div>
+
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'brands'|translate}} : </span>
+                            <span class="info-content">Galaxy</span>
+                        </div>
+
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'suppliers'|translate}} : </span>
+                            <span class="info-content">Ali AbuZaid , Mohammad AliDil</span>
+                        </div>
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'manufacturer'|translate}} : </span>
+                            <span class="info-content">No Manufacturer</span>
+                        </div>
+
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{'item_code'|translate}} : </span>
+                            <span class="info-content"></span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>{{' category'|translate}} : </span>
+                            <span class="info-content">Food</span>
+                        </div>
+
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="{{'variants'|translate}}" leftIcon="pi pi-tags">
+                    <ng-template pTemplate="content">
+                        <p-toolbar styleClass="mb-1 p-2">
+                            <div class="p-toolbar-group-left">
+                                <p-button label="New" icon="pi pi-plus" (click)="addNewVariant()">
+                                </p-button>
+                                &nbsp;
+                                <p-button label="Edit" icon="pi pi-file" (click)="EditAllVariant()">
+                                </p-button>
+                            </div>
+                            <div class="p-toolbar-group-right">
+                            </div>
+                        </p-toolbar>
+                        <smart-table [data]="data" [columns]="variantsTableCols" [frozenColumns]="frozenCols"
+                            [filters]="variantsFilters" [title]="variantsTableTitle">
+                        </smart-table>
+                    </ng-template>
+                </p-tabPanel>
+
+                <p-tabPanel header="{{'pricing'|translate}}" leftIcon="pi pi-money-bill">
+                    <ng-template pTemplate="content">
+                        <p-accordion>
+                            <p-accordionTab *ngFor="let item_variant of item_variants ; let first = first;"
+                                [title]="item_variant.label" [header]="item_variant.name" [selected]="first">
+                                <p-toolbar styleClass="pricing-toolbar">
+                                    <div class="p-toolbar-group-left">
+                                        <p-button label="New" icon="pi pi-plus" styleClass="p-button-sm"></p-button>
+                                    </div>
+                                </p-toolbar>
+                                <smart-table [data]="variantsList$ |async" [columns]="pricingVariantsTableCols"
+                                    [filters]="pricingVariantsFilters" [showTitle]="false" [showSearch]="true"
+                                    [title]="variantsTableTitle">
+                                </smart-table>
+                            </p-accordionTab>
+                        </p-accordion>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="{{'images'|translate}}" leftIcon="pi pi-images">
+                    <ng-template pTemplate="content">
+                        <p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)" multiple="multiple"
+                            accept="image/*" maxFileSize="1000000">
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length">
+                                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                </ul>
+                            </ng-template>
+                        </p-fileUpload>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="{{'row_materials'|translate}}" leftIcon="pi pi-box">
+                        <ng-template pTemplate="content">
+                            <p-toolbar styleClass="mb-1 p-2">
+                                <div class="p-toolbar-group-left">
+                                    <p-button label="New" icon="pi pi-plus" (click)="addNewRowMaterial()">
+                                    </p-button>
+                                </div>
+                                <div class="p-toolbar-group-right">
+                                </div>
+                            </p-toolbar>
+                            <p-accordion>
+                                <p-accordionTab *ngFor="let item_variant of item_variants ; let first = first;"
+                                    [title]="item_variant.label" [header]="item_variant.name" [selected]="first">
+                                    <p-toolbar styleClass="pricing-toolbar">
+                                        <div class="p-toolbar-group-left">
+                                            <p-button label="New" icon="pi pi-plus" styleClass="p-button-sm"></p-button>
+                                        </div>
+                                    </p-toolbar>
+                                    <smart-table [data]="variantsList$ |async" [columns]="pricingVariantsTableCols"
+                                        [filters]="pricingVariantsFilters" [showTitle]="false" [showSearch]="true"
+                                        [title]="variantsTableTitle">
+                                    </smart-table>
+                                </p-accordionTab>
+                            </p-accordion>
+                        </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="{{'item_movement'|translate}}" leftIcon="pi pi-history">
+                    <ng-template pTemplate="content">
+                        <smart-table [data]="itemMovements" [columns]="itemMovementsTableCols" [filters]="itemMovementsFilters" [title]="itemMovementsTitle">
+                    </smart-table>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="{{'purchase_history'|translate}}" leftIcon="pi pi-calendar">
+                    <ng-template pTemplate="content">
+                        <smart-table [data]="purchasesHistoryList$ |async" [columns]="purchasesHistoryTableCols"
+                            [filters]="purchasesHistoryFilters" [title]="purchasesHistoryTableTitle">
+                        </smart-table>
+                    </ng-template>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>

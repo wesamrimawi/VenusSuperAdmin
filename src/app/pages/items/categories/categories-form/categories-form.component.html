@@ -1,0 +1,105 @@
+<form [formGroup]="categoriesForm" (submit)="submitAdd()" [dir]="'dir'|translate">
+ <div class="container-fluid">
+   <div class="grid p-fluid">
+
+     <div class="col-12 md:col-4">
+       <label class="model-label model-label-form">{{'name'|translate}}</label>
+       <small class="p-error"
+         *ngIf="vf['name'].errors && vf['name'].errors['required']">{{'*'|translate}}
+       </small>
+       <input pInputText type="text" class="p-inputtext-md" formControlName="name" required autofocus>
+     </div>
+
+     <div class="col-12 md:col-4">
+      <label class="model-label model-label-form">{{'discount_value'|translate}}</label>
+      <input pInputText type="text" class="p-inputtext-md" formControlName="discount_value" required autofocus>
+    </div>
+
+    <div class="col-12 md:col-4">
+      <label class="model-label model-label-form">{{"discount_type"|translate}}</label>
+      <p-selectButton [options]=""   optionLabel="label" optionValue="value" formControlName="discount_type"></p-selectButton>
+
+    </div>
+
+  <div class="col-12 md:col-12">
+   <label class="model-label model-label-form">{{'branches'|translate}}</label>
+   <small class="p-error" *ngIf="vf['branches'].errors && vf['branches'].errors['required']">{{'*'|translate}}
+ </small>
+   <p-multiSelect appendTo="body"  formControlName="branches"
+     defaultLabel="{{'branches'|translate}}" display="chip" optionLabel="name" optionValue="id">
+   </p-multiSelect>
+  </div>
+
+    <div class="col-12 md:col-4">
+     <label class="model-label model-label-form">{{'taxes'|translate}}</label>
+     <p-multiSelect appendTo="body"  formControlName="taxes"
+       defaultLabel="{{'taxes'|translate}}" display="chip" optionLabel="name" optionValue="id">
+     </p-multiSelect>
+    </div>
+
+    <div class="col-12 md:col-4">
+     <label class="model-label model-label-form">{{'printers'|translate}}</label>
+     <p-multiSelect appendTo="body"  formControlName="printers"
+       defaultLabel="{{'printers'|translate}}" display="chip" optionLabel="name" optionValue="id">
+     </p-multiSelect>
+    </div>
+
+    <div class="col-12 md:col-4">
+     <label class="model-label model-label-form">{{'description'|translate}}</label>
+     <input pInputText type="text" class="p-inputtext-md" formControlName="description"  >
+    </div>
+ 
+<div class="grid">
+
+  <div class="col-12 md:col-4">
+    <div class="formgrid grid">
+        <div class="field-radiobutton col-4">
+          <p-inputSwitch formControlName="show_category_in_ordering_app"></p-inputSwitch>
+          <label >{{'show_category_in_ordering_app'|translate}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-4">
+      <div class="formgrid grid">
+        <div class="field-radiobutton col-4">
+          <p-inputSwitch formControlName="show_category_in_sale_screen"></p-inputSwitch>
+          <label >{{'show_category_in_sale_screen'|translate}}</label>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="col-12 md:col-4">
+      <div class="formgrid grid">
+        <div class="field-radiobutton col-4">
+          <p-inputSwitch formControlName="show_category_in_available_qty_report"></p-inputSwitch>
+          <label >{{'show_category_in_available_qty_report'|translate}}</label>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="col-12 md:col-4">
+      <div class="formgrid grid">
+        <div class="field-radiobutton col-4">
+          <p-inputSwitch formControlName="apply_discount_to_sub_category"></p-inputSwitch>
+          <label >{{'apply_discount_to_sub_category'|translate}}</label>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+    </div>
+
+   </div>
+   
+   <div class="grid p-fluid">
+     <div class="md:col-12 flex justify-content-end">
+       <div class="absolute bottom-0 right-0 p-3">
+         <p-button [label]="'save'|translate" [disabled]="categoriesForm.invalid" type="submit" icon="pi pi-save" styleClass="p-button-success">
+         </p-button>
+       </div>
+     </div>
+   </div>
+</form>

@@ -1,0 +1,21 @@
+@import "../../../../assets/variables";
+:host ::ng-deep {
+    .main-section{
+        background-color: white;
+    }
+    .setting .user-details span{
+        font-size: 16px;
+        text-transform: capitalize;
+        font-family: monospace;
+    }
+    .setting .user-details i{
+        font-size: 20px;
+        color: $primary-color;
+        padding-right: 5px;
+
+    }
+    .user-details{
+        text-align: center;
+    }
+
+}

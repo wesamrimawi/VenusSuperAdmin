@@ -1,0 +1,59 @@
+
+    <div *ngFor="let addressFormGroup of addressForm.controls; let i=index">
+     <form [formGroup]="addressFormGroup" (submit)="submitAddress(addressFormGroup.value)"
+         class="address-form ui-fluid p-formgrid p-grid">
+         <div *ngIf="i" class="p-col-12 md:mb-2" dir="{{'dir'|translate }}"> 
+             <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="removeAddressFrom(i)"></button>
+         </div>
+         <div class="grid p-fluid">
+             <div class="field col-12 md:col-4 ">
+                 <label class="model-label model-label-form" >{{'address'|translate}}</label>
+                 <input  [id]="'address'+i" type="text" class="inputfield w-full" formControlName="address" pInputText>
+             </div>
+
+             <div class="field col-12 md:col-4 ">
+                 <label>{{"governorate"|translate}}</label>
+                 <input type="text" [id]="'governorate'+i" class="inputfield w-full" formControlName="governorate" pInputText>
+             </div>
+
+
+             <div class="field col-12 md:col-4 ">
+                 <label> {{"area"|translate}}</label>
+                 <input type="text" [id]="'area'+i" class="inputfield w-full" formControlName="area" pInputText>
+             </div>
+
+             <div class="field col-12 md:col-4 ">
+                 <label>{{"street"|translate}}</label>
+                 <input type="text" [id]="'street'+i" class="inputfield w-full" formControlName="street" pInputText>
+             </div>
+
+             <div class="field col-12 md:col-4 ">
+                 <label>{{"floor"|translate}}</label>
+                 <input type="text" [id]="'floor_number'+i" class="inputfield w-full" formControlName="floor_number" pInputText>
+             </div>
+
+             <div class="field col-12 md:col-4 ">
+                 <label>{{"address_description"|translate}} </label>
+                 <input type="text" [id]="'address_description'+i" class="inputfield w-full" formControlName="address_description" pInputText>
+             </div>
+
+             <div class="field col-12 md:col-4 ">
+                 <label>{{"building_number"|translate}}</label>
+                 <input type="text"  [id]="'building_number'+i" class="inputfield w-full" formControlName="building_number" pInputText>
+             </div>
+
+             <div class="field col-12 md:col-6 ">
+                 <label>{{"address_type"|translate}}</label>
+                 <p-selectButton [options]="type" [id]="'type'+i"  optionLabel="label" optionValue="value"  formControlName="type"></p-selectButton>
+             </div>
+
+         </div>
+     </form>
+         
+    </div>
+    <div class="grid p-fluid">
+     <div class="col-12 md:col-4">
+         <button type="button"  pButton (click)="addNewAddressForm()"  icon="pi pi-plus-circle" icon="pi pi-info-circle" [label]="'add_customer_address' |translate"></button>
+     </div>
+
+ </div>

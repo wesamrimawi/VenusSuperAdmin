@@ -1,0 +1,9 @@
+.danger{
+  color: red;
+}
+:host::ng-deep{
+  .p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button{
+    padding:15px 20px;
+    margin: 8px;
+  }
+}

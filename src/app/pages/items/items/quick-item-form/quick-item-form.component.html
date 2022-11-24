@@ -1,0 +1,101 @@
+<div *ngFor="let itemFormGroup of itemsForm.controls; let i=index">
+    <form [formGroup]="itemFormGroup" (submit)="submitAddress(itemFormGroup.value)" class="ui-fluid p-formgrid p-grid">
+
+        <div class="grid p-fluid">
+            <div class="col-12 sm:col-6 md:col-3">
+                <label class="model-label model-label-form">{{'name'|translate}}</label>
+                <input [id]="'name_'+i" type="text" class="inputfield w-full" formControlName="name" pInputText>
+            </div>
+
+
+            <div class="col-12 sm:col-6 md:col-3">
+                <label class="model-label model-label-form">{{'taxes'|translate}}</label>
+                <p-multiSelect appendTo="body" [options]="taxesList" formControlName="taxes" [id]="'taxes_'+i"
+                    defaultLabel="{{'taxes'|translate}}" display="chip" optionLabel="name" optionValue="id">
+                </p-multiSelect>
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-3">
+                <label class="model-label model-label-form">{{'categories'|translate}}</label>
+                <p-multiSelect appendTo="body" [options]="categoriesList" formControlName="categories"
+                    [id]="'categories_'+i" defaultLabel="{{'categories'|translate}}" display="chip" optionLabel="name"
+                    optionValue="id">
+                </p-multiSelect>
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-3">
+                <label class="model-label model-label-form">{{'branches'|translate}}</label>
+                <p-multiSelect appendTo="body" [options]="branchesList" formControlName="branches" [id]="'branches_'+i"
+                    defaultLabel="{{'branches'|translate}}" display="chip" optionLabel="name" optionValue="id">
+                </p-multiSelect>
+            </div>
+
+
+
+            <div class="col-12 sm:col-6 md:col-2">
+                <label class="model-label model-label-form">{{'suppliers'|translate}}</label>
+                <p-multiSelect appendTo="body" [options]="suppliersList" formControlName="suppliers"
+                    [id]="'suppliers_'+i" defaultLabel="{{'suppliers'|translate}}" display="chip" optionLabel="name"
+                    optionValue="id">
+                </p-multiSelect>
+            </div>
+
+
+            <div class="col-12 sm:col-6 md:col-2">
+                <label class="model-label model-label-form">{{'sale_price'|translate}}</label>
+                <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5"
+                    formControlName="sale_price" [id]="'sale_price_'+i">
+                </p-inputNumber>
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-2">
+                <label class="model-label model-label-form">{{'offer_price'|translate}}</label>
+                <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5"
+                    formControlName="offer_price" [id]="'offer_price_'+i">
+                </p-inputNumber>
+            </div>
+
+
+            <div class="col-12 sm:col-6 md:col-2">
+                <label class="model-label model-label-form">{{'cost_price'|translate}}</label>
+                <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5"
+                    formControlName="cost_price" [id]="'cost_price_'+i">
+                </p-inputNumber>
+            </div>
+
+
+            <div class="col-12 sm:col-6 md:col-2">
+                <label class="model-label model-label-form">{{'purchase_price'|translate}}</label>
+                <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5"
+                    formControlName="purchase_price" [id]="'purchase_price_'+i">
+                </p-inputNumber>
+            </div>
+
+            <div class="col-12 sm:col-6 md:col-2">
+                <label class="model-label model-label-form">{{'safety_stock'|translate}}</label>
+                <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5"
+                    formControlName="safety_stock" [id]="'safety_stock_'+i">
+                </p-inputNumber>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-12 sm:col-6 md:col-3">
+                <div class="absolute bottom-0 right-0 p-3">
+                    <p-button label="{{'save'|translate}}" type="submit" icon="pi pi-save"
+                        styleClass="p-button-success">
+                    </p-button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div *ngIf="i" class="p-col-12 mb-2" dir="{{'dir'|translate }}">
+        <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="removeAddressFrom(i)"
+            [label]="'delete_item' |translate"></button>
+    </div>
+</div>
+<div class="grid p-fluid">
+    <div class="col-12 md:col-6 lg:col-3">
+        <button type="button" pButton (click)="addNewAddressForm()" icon="pi pi-plus-circle"
+            [label]="'add_item' |translate"></button>
+    </div>
+</div>

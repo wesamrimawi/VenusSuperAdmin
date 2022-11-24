@@ -1,0 +1,21 @@
+<form [formGroup]="tagForm" (submit)="submitAdd(tagForm.value)" [dir]="'dir'|translate">
+  <div class="grid p-fluid">
+    <div class="field col-12 md:col-6 mb-5">
+      <label for="name">{{'name' | translate}}</label>
+      <input pInputText formControlName="name" id="name" type="text" autofocus />
+      <span class="error"
+        *ngIf="vf['name'].errors && vf['name'].errors['required']">{{'name_is_required' | translate}}</span>
+    </div>
+    <div class="field col-12 md:col-6 mb-5">
+      <label for="parent_tag_id">{{'sub_tag' | translate}}</label>
+      <p-treeSelect [options]="tagsList$|async" formControlName="parent_tag_id" appendTo="body" placeholder="{{'select_item'|translate}}"></p-treeSelect>
+    </div>
+  </div>
+  <div class="absolute  bottom-0  right-0">
+    <div class="field col-12 mt-5">
+  
+        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"  [disabled]="tagForm.invalid && !editMode"></button>
+
+    </div>
+  </div>
+</form>

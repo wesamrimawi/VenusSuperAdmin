@@ -1,0 +1,151 @@
+<form [formGroup]="variantForm" (submit)="submitAdd(variantForm.value)">
+  <div class="container-fluid">
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'name'|translate}}</label>
+        <small class="p-error"
+        *ngIf="vf['name'].errors && vf['name'].errors['required']"><span>&nbsp;{{'*'|translate}}</span>
+      </small>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="name" autofocus>
+      </div>
+
+
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'variant_code'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="variant_code">
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'scale_barcodes'|translate}}</label>
+        <p-autoComplete formControlName="scale_barcode_id" [suggestions]="filteredScaleBarcodes"
+          (completeMethod)="filterScaleBarcodes($event)" field="name" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+
+
+
+      
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'branches'|translate}}</label>
+        <small class="p-error"
+          *ngIf="vf['branches'].errors && vf['branches'].errors['required']"><span>&nbsp;{{'*'|translate}}</span>
+        </small>
+        <p-multiSelect appendTo="body" [options]="branchList" formControlName="branches"
+          defaultLabel="{{'branches'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'attributes'|translate}}</label>
+        <p-multiSelect appendTo="body" [options]="attributeList" formControlName="attributes"
+          defaultLabel="{{'attributes'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+
+
+
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'taxes'|translate}}</label>
+        <p-multiSelect appendTo="body" [options]="taxesList" formControlName="taxes"
+          defaultLabel="{{'taxes'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+
+
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'serials'|translate}}</label>
+        <p-multiSelect appendTo="body" [options]="serialsList" formControlName="serials"
+          defaultLabel="{{'serials'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+
+
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'barcodes'|translate}}</label>
+        <p-multiSelect appendTo="body" [options]="barcodesList" formControlName="barcodes"
+          defaultLabel="{{'barcodes'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+
+
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'parent'|translate}}</label>
+        <p-autoComplete formControlName="parent_id" [suggestions]="filteredItemParent"
+          (completeMethod)="filterItemParent($event)" field="name" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'column_number'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="column_number">
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'row_number'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="row_number">
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'shelf_number'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="shelf_number">
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'warranty_period'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="warranty_period">
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'isbn'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="isbn">
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{"sale_item_method"|translate}}</label>
+        <p-selectButton [options]="" optionLabel="label" optionValue="value"
+          formControlName="sale_item_method">
+        </p-selectButton>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'calories'|translate}}</label>
+        <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5" formControlName="calories">
+        </p-inputNumber>
+      </div>
+
+      <div class="col-12">
+        <label class="model-label model-label-form">{{'box_color'|translate}}</label><br>
+        <p-colorPicker formControlName="barcodes"></p-colorPicker>
+      </div>
+
+
+
+    </div>
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="show_in_category"></p-inputSwitch>
+            <label for="show_in_category">{{'show_in_category'|translate}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+      <div class="absolute bottom-0 right-0 p-3">
+        <p-button label="{{'save'|translate}}" [disabled]="variantForm.invalid" type="submit" icon="pi pi-save"
+          styleClass="p-button-success">
+        </p-button>
+      </div>
+    </div>
+  </div>
+</form>

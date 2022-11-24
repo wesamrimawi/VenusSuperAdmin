@@ -1,0 +1,21 @@
+<form [formGroup]="systemModuleForm" (submit)="submitAdd(systemModuleForm.value)" [dir]="'dir'|translate">
+  <div class="grid p-fluid">
+    <div class="field col-12 md:col-6  sm:col-12 mb-5">
+      <label for="name">{{'name'|translate}}</label>
+      <input pInputText formControlName="name" id="name" type="text" autofocus>
+      <span class="error"
+        *ngIf="vf['name'].errors && vf['name'].errors['required']">{{'name_is_required'|translate}}</span>
+    </div>
+    <div class="field col-12 md:col-6 sm:col-12">
+      <label for="parent_module_id">{{'sub_module'|translate}}</label>
+      <p-treeSelect [options]="systemModulesList$|async" formControlName="parent_module_id" appendTo="body"
+        placeholder="{{'select_item'|translate}}"></p-treeSelect>
+    </div>
+  </div>
+  <div class="absolute  bottom-0  right-0">
+    <div class="field col-12">
+        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"   [disabled]="systemModuleForm.invalid && !editMode "></button>
+
+    </div>
+  </div>
+</form>

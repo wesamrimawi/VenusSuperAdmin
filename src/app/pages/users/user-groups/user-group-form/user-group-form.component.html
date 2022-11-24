@@ -1,0 +1,41 @@
+<form [formGroup]="userGroupForm" (submit)="submitAdd(userGroupForm.value)" [dir]="'dir'|translate">
+  <div class="container-fluid">
+    <div class="grid p-fluid">
+
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'name'|translate}}</label>
+        <small class="p-error" *ngIf="vf['name'].errors && vf['name'].errors['required']"><span>&nbsp;*</span></small>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="name" required autofocus>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'system_modules'|translate}}</label>
+        <small class="p-error"
+          *ngIf="vf['system_modules'].errors && vf['system_modules'].errors['required']"><span>&nbsp;*</span></small>
+        <p-multiSelect appendTo="body"  formControlName="system_modules"
+          defaultLabel="{{'selected'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+
+      <div class="col-12">
+        <label class="model-label model-label-form">{{'branches'|translate}}</label>
+        <small class="p-error"
+          *ngIf="vf['branches'].errors && vf['branches'].errors['required']"><span>&nbsp;*</span></small>
+        <p-multiSelect appendTo="body"  formControlName="branches"
+          defaultLabel="{{'selected'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+
+    </div>
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-12 flex justify-content-end">
+        <div class="absolute bottom-0  p-3">
+          <p-button [label]="'save'|translate" type="submit" [disabled]="userGroupForm.invalid" icon="pi pi-save"
+            styleClass="p-button-success">
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

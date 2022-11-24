@@ -1,0 +1,45 @@
+<form [formGroup]="userGroupForm" (submit)="submitAdd(userGroupForm.value)" [dir]="'dir'|translate">
+  <div class="grid p-fluid">
+    <div class="col-12 md:sm-12 md:col-6 w-full">
+      <label for="name">{{'name'|translate}}</label>
+      <input pInputText id="name" formControlName="name" type="text" autofocus />
+    </div>
+    <div class="col-12 md:sm-12 md:col-12">
+      <p-table [value]="listOfPermissions$|async" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>{{'permission'|translate}}</th>
+            <th>{{'read'|translate}}</th>
+            <th>{{'create'|translate}}</th>
+            <th>{{'update'|translate}}</th>
+            <th>{{'delete'|translate}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-permission>
+          <tr [formGroupName]="permission.id">
+            <td>{{permission.name}}</td>
+            <td>
+              <p-checkbox name="view" [binary]="true" formControlName="read"></p-checkbox>
+            </td>
+            <td>
+              <p-checkbox name="create" [binary]="true" formControlName="create"></p-checkbox>
+            </td>
+            <td>
+              <p-checkbox name="update" [binary]="true" formControlName="update"></p-checkbox>
+            </td>
+            <td>
+              <p-checkbox name="delete" [binary]="true" formControlName="delete"></p-checkbox>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <div class="absolute  bottom-0  right-0">
+    <div class="field col-12 md:col-12">
+    
+        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"   [disabled]="userGroupForm.invalid || isSubmitted"></button>
+
+    </div>
+  </div>
+</form>

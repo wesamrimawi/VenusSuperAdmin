@@ -1,0 +1,74 @@
+<div class="grid mt-1" [dir]="'dir'|translate">
+  <div class="col-12 lg:col-6">
+    <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">{{'new_account_number'|translate}}</span>
+          <div class="text-900 font-medium text-xl">{{ totalClients.total }}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+          style="width: 2.5rem; height: 2.5rem">
+          <i class="pi pi-user-plus text-blue-500 text-xl"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">{{ totalClients.totalLastWeek }}
+        {{'new'|translate}}</span>&nbsp;<span class="text-500">
+        {{'since_last_7_days'|translate}}
+      </span>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6">
+    <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">{{'total_accounts'|translate}}</span>
+          <div class="text-900 font-medium text-xl">{{ totalStores.total }}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
+          style="width: 2.5rem; height: 2.5rem">
+          <i class="pi pi-users text-orange-500 text-xl"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">{{ totalStores.totalLastWeek }} </span><span
+        class="text-500">{{'since_last_7_days'|translate}}</span>
+    </div>
+  </div>
+  <!--
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">{{'number_of_transactions'|translate}}</span>
+          <div class="text-900 font-medium text-xl">28441</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+          style="width: 2.5rem; height: 2.5rem">
+          <i class="pi pi-shopping-cart text-cyan-500 text-xl"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">520 </span><span class="text-500">{{'today'|translate}}</span>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">{{'total_transactions_amount'|translate}}</span>
+          <div class="text-900 font-medium text-xl">152</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
+          style="width: 2.5rem; height: 2.5rem">
+          <i class="pi pi-money-bill text-purple-500 text-xl"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">85.888</span><span class="text-500"> {{'today'|translate}}</span>
+    </div>
+  </div>
+   -->
+</div>
+
+<div class="card">
+  <smart-table [filters]="['id' , 'store.code' , 'client.client_name' , 'mobile', 'branch_name']"
+    [title]="'list_of_clients'|translate" [data]="clientList$|async" [manageButton]="true" [deleteButton]="false"
+    [editButton]="false" (manageClicked)="goToClientProfile($event)" [columns]="tableCols"></smart-table>
+</div>

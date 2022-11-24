@@ -1,0 +1,67 @@
+<form [formGroup]="userForm" (submit)="submitAdd(userForm.value)" [dir]="'dir'|translate">
+  <div class="grid p-fluid">
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="name">{{'name'|translate}}</label>
+      <input pInputText id="name" formControlName="name" type="text" autofocus />
+      <span class="error"
+        *ngIf="vf['name'].errors && vf['name'].errors['required']">{{'name_is_required'|translate}}</span>
+      <span class="error"
+        *ngIf="vf['name'].errors && vf['name'].errors['minlength']">{{'four_characters_minimum'|translate}}</span>
+    </div>
+
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="username">{{'user_name'|translate}}</label>
+      <input pInputText id="username" formControlName="username" type="text" autofocus />
+      <span class="error"
+        *ngIf="vf['username'].errors && vf['username'].errors['required']">{{'user_name_is_required'|translate}}</span>
+      <span class="error"
+        *ngIf="vf['username'].errors && vf['username'].errors['minlength']">{{'four_characters_minimum'|translate}}</span>
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <label for="mobile">{{'mobile'|translate}}</label>
+      <input pInputText id="mobile" formControlName="mobile" type="text" />
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="password">{{'password'|translate}}</label>
+      <input pInputText id="password" formControlName="password" type="password" (onkeyup)="enableValidation($event)" />
+      <span class="error"
+        *ngIf="vf['password'].errors && vf['password'].errors['required'] && !editMode">{{'password_is_required'|translate}}</span>
+      <span class="error"
+        *ngIf="vf['password'].errors && vf['password'].errors['minlength'] && !editMode">{{'five_characters_minimum'|translate}}</span>
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="confirm_password">{{'confirm_password'|translate}}</label>
+      <input pInputText id="confirm_password" formControlName="confirm_password" type="password" />
+      <span class="error"
+        *ngIf="vf['confirm_password'].errors && vf['confirm_password'].errors['required'] && !editMode">{{'confirm_password_is_required'|translate}}</span>
+      <span class="error"
+        *ngIf="vf['confirm_password'].errors  && vf['confirm_password'].errors['mustMatch']&& !editMode">{{'password_is_mismatch'|translate}}</span>
+    </div>
+
+
+
+    <div class="field col-12 md:col-4">
+      <label for="email">{{'email'|translate}}</label>
+      <input pInputText id="email" type="email" formControlName="email" />
+      <span class="error"
+        *ngIf="vf['email'].errors && vf['email'].errors['email']">{{'wrong_email_address'|translate}}</span>
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label for="role_id">{{'user_groups'|translate}}</label>
+      <p-dropdown appendTo="body" [options]="userGroups$|async" placeholder="{{'select_user_group'|translate}}"
+        id="role_id" formControlName="role_id" optionLabel="name" [showClear]="true"></p-dropdown>
+    </div>
+  </div>
+  <div class="absolute  bottom-0  right-0">
+    <div class="field col-12 md:col-12">
+   
+        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"  [disabled]="userForm.invalid && !editMode"></button>
+
+    </div>
+  </div>
+</form>

@@ -1,0 +1,232 @@
+<form [formGroup]="itemForm" (submit)="submitAdd(itemForm.value)">
+  <div class="container-fluid">
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'name'|translate}}</label>
+        <small class="p-error"
+          *ngIf="vf['name'].errors && vf['name'].errors['required']"><span>&nbsp;*</span>
+        </small>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="name" autofocus>
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'short_description'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="short_description" >
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'long_description'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="long_description" >
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'alert_information'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="alert_information" >
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{"discount_type"|translate}}</label>
+        <p-selectButton [options]="" optionLabel="label" optionValue="value"
+          formControlName="discount_type">
+        </p-selectButton>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'discount_value'|translate}}</label>
+        <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5" formControlName="discount_value">
+        </p-inputNumber>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'max_discount_value'|translate}}</label>
+        <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5"
+          formControlName="max_discount_value">
+        </p-inputNumber>
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'min_sale_price'|translate}}</label>
+        <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5" formControlName="min_sale_price">
+        </p-inputNumber>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{"commission_type"|translate}}</label>
+        <p-selectButton [options]="" optionLabel="label" optionValue="value"
+          formControlName="commission_type">
+        </p-selectButton>
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'commission_value'|translate}}</label>
+        <p-inputNumber mode="decimal" [minFractionDigits]="3" [maxFractionDigits]="5"
+          formControlName="commission_value">
+        </p-inputNumber>
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'item_code'|translate}}</label>
+        <input pInputText type="text" class="p-inputtext-md" formControlName="item_code" >
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{"item_type"|translate}}</label>
+        <p-selectButton [options]="" optionLabel="label" optionValue="value" formControlName="item_type">
+        </p-selectButton>
+      </div>
+
+
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'branches'|translate}}</label>
+        <small class="p-error"
+          *ngIf="vf['branches'].errors && vf['branches'].errors['required']"><span>&nbsp;{{'*'|translate}}</span>
+        </small>
+        <p-multiSelect appendTo="body" [options]="branchList" formControlName="branches"
+          defaultLabel="{{'branches'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+      <div class="col-12 md:col-6">
+        <label class="model-label model-label-form">{{'suppliers'|translate}}</label>
+        <p-multiSelect appendTo="body" [options]="supplierList" formControlName="suppliers"
+          defaultLabel="{{'suppliers'|translate}}" display="chip" optionLabel="name" optionValue="id">
+        </p-multiSelect>
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'brands'|translate}}</label>
+        <p-autoComplete formControlName="brand_id" [suggestions]="filteredBrands"
+          (completeMethod)="filterBrands($event)" field="name" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'manufactures'|translate}}</label>
+        <p-autoComplete formControlName="manufacture_id" [suggestions]="filteredManufacturers"
+          (completeMethod)="filterManufacturers($event)" field="name" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">{{'categories'|translate}}</label>
+        <p-autoComplete formControlName="category_id" [suggestions]="filteredCategories"
+          (completeMethod)="  filterCategories($event)" field="name" [dropdown]="true">
+        </p-autoComplete>
+      </div>
+
+    </div>
+    <div class="grid p-fluid">
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="is_active"></p-inputSwitch>
+            <label for="is_active">{{'is_active'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="is_favorite"></p-inputSwitch>
+            <label for="is_favorite">{{'is_favorite'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="has_stock"></p-inputSwitch>
+            <label for="has_stock">{{'has_stock'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="is_service"></p-inputSwitch>
+            <label for="is_service">{{'is_service'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="control_item"></p-inputSwitch>
+            <label for="control_item">{{'control_item'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="show_item"></p-inputSwitch>
+            <label for="show_item">{{'show_item'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="change_item_name"></p-inputSwitch>
+            <label for="change_item_name">{{'change_item_name'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="change_item_price"></p-inputSwitch>
+            <label for="change_item_price">{{'change_item_price'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="show_in_customer_records"></p-inputSwitch>
+            <label for="show_in_customer_records">{{'show_in_customer_records'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="has_serial"></p-inputSwitch>
+            <label for="has_serial">{{'has_serial'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-4">
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-12">
+            <p-inputSwitch formControlName="is_group_item"></p-inputSwitch>
+            <label for="is_group_item">{{'is_group_item'|translate}}</label>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+      <div class="absolute bottom-0 right-0 p-3">
+        <p-button label="{{'save'|translate}}" [disabled]="itemForm.invalid" type="submit" icon="pi pi-save"
+          styleClass="p-button-success">
+        </p-button>
+      </div>
+    </div>
+  </div>
+</form>

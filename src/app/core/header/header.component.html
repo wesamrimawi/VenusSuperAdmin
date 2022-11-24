@@ -1,0 +1,26 @@
+
+<p-menubar class="p-2">
+    <button pButton pRipple type="button" class="p-button-rounded p-button-text p-button-lg" icon="pi pi-globe"
+      style="font-size: 50px" (click)="lang.toggle($event)" [pTooltip]="'change_language'|translate"
+      tooltipPosition="bottom">
+    </button>
+  
+  <button pButton (click)="logOut()" label="Logout" icon="pi pi-power-off"></button>
+</p-menubar>
+
+<!-- dropDown To Switch languages  -->
+<p-overlayPanel #lang >
+  <ng-template pTemplate>
+    <div [dir]="'dir'|translate" class="p-formgroup-inline">
+      <button pButton pRipple type="button" label="English" class="p-button-secondary p-button-text p-button-md"
+        (click)="changeLanguage('en')">
+      </button>
+    </div>
+
+    <div [dir]="'dir'|translate" class="p-formgroup-inline">
+      <button pButton pRipple type="button" label="العربية" class="p-button-secondary p-button-text p-button-md"
+        (click)="changeLanguage('ar')">
+      </button>
+    </div>
+  </ng-template>
+</p-overlayPanel>

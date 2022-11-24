@@ -1,0 +1,69 @@
+.alignleft {
+  float: left;
+}
+.alignright {
+  float: right;
+}
+
+.profile-info {
+  span {
+    vertical-align: middle;
+    font-weight: 500;
+    color: #0f97c7;
+  }
+
+  .info-content {
+    font-weight: 400;
+    color: #000;
+  }
+
+  i {
+    font-size: 17px;
+    margin-right: 0.25em;
+    vertical-align: middle;
+    color: #0f97c7;
+  }
+}
+
+.profile-totals {
+  span {
+    vertical-align: middle;
+    font-weight: 500;
+    color: #0f97c7;
+  }
+  i {
+    font-size: 17px;
+    margin-right: 0.25em;
+    vertical-align: middle;
+    color: #0f97c7;
+  }
+
+  .profile-totals-content {
+    font-weight: 400;
+    color: #000;
+  }
+
+  border: #0f97c7 2px solid;
+}
+:host ::ng-deep {
+  .p-accordion .p-accordion-content {
+    padding: 0 !important;
+  }
+
+  .pricing-toolbar {
+    border: 0 !important;
+    padding: 0.5rem !important;
+    border-radius: 0 !important;
+  }
+
+  h6 {
+    color: #0f97c7;
+    span{
+      color: #0f97c7;
+      font-weight: 0;
+    }
+  }
+  
+}
+
+

@@ -1,0 +1,80 @@
+<form [formGroup]="expenseForm" (submit)="submitAdd(expenseForm.value)" [dir]="'dir'|translate">
+    <div class="container-fluid">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-12">
+                <!-- <label class="model-label model-label-form">{{'type'|translate}}</label> -->
+                <small class="ng-dirty ng-invalid p-error"
+                    *ngIf="vf['type'].errors && vf['type'].errors['required']">
+                    <span>&nbsp;*</span>
+                </small>
+                <p-selectButton [options]="" optionLabel="label" optionValue="value" #type (onChange)="selectType(type.value)"
+                formControlName="type"></p-selectButton>
+
+            </div>
+
+            <div class="col-12 md:col-6">
+                <label class="model-label model-label-form">{{'amount'|translate}}</label>
+                    <small class="ng-dirty ng-invalid p-error"
+                        *ngIf="vf['amount'].errors && vf['amount'].errors['required']">
+                        <span>&nbsp;*</span>
+                    </small>
+                <p-inputNumber inputId="minmaxfraction" mode="decimal"  formControlName="amount"></p-inputNumber>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <label class="model-label model-label-form">{{'type'|translate}}</label>
+                 <p-dropdown [options]="filiterType" formControlName="expense_type"  optionLabel="name"></p-dropdown>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <label class="model-label model-label-form">{{'tax_amount'|translate}}</label>
+                <p-inputNumber inputId="minmaxfraction" mode="decimal"  formControlName="tax_amount">  </p-inputNumber>
+            </div>
+
+
+
+            <div class="col-12 md:col-6">
+                <label class="model-label model-label-form">{{'reference_number'|translate}}</label>
+                <input pInputText type="text" class="p-inputtext-md" formControlName="reference_number">
+            </div>
+
+            <div class="col-12 md:col-6">
+                <label class="model-label model-label-form">{{'suppliers'|translate}}</label>
+                <p-autoComplete formControlName="suppliers" 
+                     field="name" [dropdown]="true">
+                </p-autoComplete>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <label class="model-label model-label-form">{{'invoice_number'|translate}}</label>
+                <input pInputText type="text" class="p-inputtext-md" formControlName="invoice_number">
+            </div>
+
+            <div class="col-12 md:col-6">
+                <label class="model-label model-label-form" for="notes">{{'notes'|translate}}</label>
+                <textarea [rows]="1" [cols]="50" id="notes" formControlName="notes" pInputTextarea></textarea>
+            </div>
+
+            
+        </div>
+
+        <div class="field">
+            <div class="formgrid grid">
+                <div class="field-radiobutton col-6">
+                    <p-inputSwitch formControlName="deducting_from_cash"></p-inputSwitch>
+                    <label>{{'deducting_from_cash'|translate}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-12 flex justify-content-end">
+                <div class="absolute bottom-0  p-3">
+                    <p-button [label]="'save'|translate" [disabled]="expenseForm.invalid" type="submit"
+                        icon="pi pi-save" styleClass="p-button-success">
+                    </p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

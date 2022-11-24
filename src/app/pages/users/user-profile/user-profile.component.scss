@@ -1,0 +1,26 @@
+.alignleft {
+  float: left;
+}
+.alignright {
+  float: right;
+}
+
+.profile-info {
+  span {
+    vertical-align: middle;
+    font-weight: 500;
+	color: #0f97c7;
+  }
+
+  .info-content{
+	font-weight: 400;
+	color: #000;
+  }
+
+  i {
+    font-size: 17px;
+    margin-right: 0.25em;
+    vertical-align: middle;
+    color: #0f97c7;
+  }
+}

@@ -1,0 +1,15 @@
+
+<div class="grid" [dir]="'dir'|translate">
+  <div class="col-12">
+      <div class="card">
+          <p-toolbar styleClass="mb-1 p-2">
+              <div class="p-toolbar-group-left">
+                  <p-button [label]="'user_groups'|translate" icon="pi pi-plus" (click)="showAddDialog()"></p-button>
+              </div>
+          </p-toolbar>
+          <smart-table [title]="title" [columns]="tableCols" (editClicked)="showEditDialog($event)" [filters]="filiterGroups"
+          (deleteClicked)="deleteUserGroup($event)" [data]="userGroupList$|async" [showLoader]="showSmartTableLoader" >
+        </smart-table>
+      </div>
+  </div>
+</div>

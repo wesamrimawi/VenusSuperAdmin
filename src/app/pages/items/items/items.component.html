@@ -1,0 +1,16 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <p-toolbar styleClass="mb-1 p-2">
+                <div class="p-toolbar-group-left">
+                    <p-button label="{{'add_new'|translate}}" icon="pi pi-plus" class="p-button-success"
+                        (click)="addNewQuick()"></p-button>
+                </div>
+                <div class="p-toolbar-group-right">
+                </div>
+            </p-toolbar>
+            <smart-table [data]="itemList$ |async" [columns]="tableCols" [filters]="filters" [title]="tableTitle">
+            </smart-table>
+        </div>
+    </div>
+</div>

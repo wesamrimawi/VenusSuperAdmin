@@ -1,0 +1,37 @@
+
+
+
+<div class="grid" [dir]="'dir'|translate">
+  <div class="col-12">
+      <div class="card">
+          <p-toolbar styleClass="mb-1 p-2">
+              <div class="p-toolbar-group-left">
+                  <p-button [label]="'add'|translate" icon="pi pi-plus" (click)="showAddDialog()"></p-button>
+              </div>
+          </p-toolbar>
+          <smart-table [data]="clientsList$|async" (deleteClicked)="deleteClient($event)" [manageButton]="false"
+          (editClicked)="manageClientDetails($event)"
+           [columns]="tableCols" [filters]="['id' , 'client_name' , 'mobile' , 'email']" [title]="tableTitle"></smart-table>
+      </div>
+  </div>
+</div>
+<!-- <div class="card">
+  <div class="grid m-2" [dir]="'dir'|translate">
+    <div class="col-6">
+      <div class="title">
+        <h3>{{"clients"|translate}}</h3>
+      </div>
+    </div>
+    <div class="col-6 flex flex-row-reverse">
+      <div class="add-btn">
+        <button pButton type="button" class="p-button-warning" icon="pi pi-plus-circle" (click)="showAddDialog()"
+          [label]="'add'|translate"></button>
+      </div>
+    </div>
+  </div>
+  <div class="p-p-3" >
+    <smart-table  [title]="'list_of_clients'|translate" (deleteClicked)="deleteClient($event)" [manageButton]="false"
+      (editClicked)="manageClientDetails($event)" [filters]="['id' , 'client_name' , 'mobile' , 'email']" [columns]="tableCols" [data]="clientsList$|async"></smart-table>
+  </div>
+</div> -->
+<p-toast></p-toast>

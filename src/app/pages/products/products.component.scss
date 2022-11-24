@@ -1,0 +1,9 @@
+:host ::ng-deep {
+    .p-button{
+        border-radius: 0px;
+    }
+    .p-button.p-button-warning, .p-buttonset.p-button-warning > .p-button, .p-splitbutton.p-button-warning > .p-button {
+        padding: 12px 35px !important;
+        border-radius: 50px;
+    }
+}

@@ -1,0 +1,70 @@
+@import "../../assets/variables.scss";
+
+// .login-form {
+//   background: #fff;
+//   border-radius: 5px;
+//   padding: 7px 4px;
+//   margin: 4px;
+//   position: relative;
+//   -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+//   -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+//   box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.438);
+// }
+
+// .p-inputgroup-addon:last-child,
+// .p-inputgroup button:last-child,
+// .p-inputgroup input:last-child,
+// .p-inputgroup>.p-inputwrapper:last-child>.p-component,
+// .p-inputgroup>.p-inputwrapper:last-child>.p-component>.p-inputtext {
+//   width: 300px;
+// }
+
+// .p-inputgroup-addon:first-child,
+// .p-inputgroup button:first-child,
+// .p-inputgroup input:first-child,
+// .p-inputgroup>.p-inputwrapper:first-child>.p-component,
+// .p-inputgroup>.p-inputwrapper:first-child>.p-component>.p-inputtext {
+//   background: $primary-color;
+//   color: white;
+// }
+
+:host::ng-deep {
+  //   .p-checkbox .p-checkbox-box.p-highlight {
+  //     border-color: $primary-color;
+  //     background: $primary-color;
+  //   }
+
+  //   .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  //     background-color: $primary-color !important;
+  //     border-color: $primary-color;
+  //   }
+
+  //   .p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled).p-focus {
+  //     background-color: $primary-color !important;
+  //     border-color: $primary-color;
+  //   }
+
+  //   label {
+  //     color: $header-color !important;
+  //     font-size: 20px;
+  //     font-family: $font-family;
+
+  //   }
+
+  //   .forget-section a {
+  //     color: $header-color !important;
+  //     font-size: 20px;
+  //     font-family: $font-family;
+  //     text-decoration: none;
+  //   }
+
+  .p-button.p-button-success.p-button-outlined {
+    padding: 14px;
+    color: $primary-color;
+  }
+  
+.logo{
+  max-width:  -webkit-fill-available;
+}
+
+}

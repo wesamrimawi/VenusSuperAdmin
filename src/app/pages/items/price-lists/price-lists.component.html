@@ -1,0 +1,12 @@
+<div class="grid" [dir]="'dir'|translate">
+ <div class="col-12">
+     <div class="card">
+         <p-toolbar styleClass="mb-1 p-2">
+             <div class="p-toolbar-group-left">
+                 <p-button [label]="'new'|translate" icon="pi pi-plus" (click)="addNew()"></p-button>
+             </div>
+         </p-toolbar>
+         <smart-table [data]="priceList$ |async " [columns]="tableCols" [filters]="filters" [title]="tableTitle"></smart-table>
+     </div>
+ </div>
+</div>

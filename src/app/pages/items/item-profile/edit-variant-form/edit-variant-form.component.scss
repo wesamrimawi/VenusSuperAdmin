@@ -1,0 +1,11 @@
+:host ::ng-deep {
+  .p-datatable-scrollable .p-datatable-thead > tr > th,
+  .p-datatable-scrollable .p-datatable-tbody > tr > td,
+  .p-datatable-scrollable .p-datatable-tfoot > tr > td {
+    flex: none !important;
+  }
+
+  .p-multiselect{
+    width: 180px;
+  }
+}

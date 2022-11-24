@@ -1,0 +1,53 @@
+<!-- main | larg screen -->
+<div class="asidebar" *ngIf="visableNormal">
+  <!--  logo -->
+  <div class="logo hvr-skew-backward">
+    <img src="assets/images/logo.png" routerLink="dashboard" width="100" class="text-center" />
+  </div>
+
+  <ul class="nav">
+    <li *ngFor="let tap of allTaps">
+      <a [routerLink]="tap.key" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <i class="pi pi-home icons"></i>
+        {{tap.name}}
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="asidebar-sm" *ngIf="visableSmall">
+  <!--  logo -->
+  <div class="logo img-sm">
+    <img src="assets/images/logo.png" width="75" />
+  </div>
+
+  <ul class="nav">
+    <li>
+      <a routerLink="dashboard" [pTooltip]="'Dashboard'" routerLinkActive="active"><i class="pi pi-home icons"></i></a>
+    </li>
+    <li>
+      <a routerLink="clients" [pTooltip]="'Clients'" routerLinkActive="active"><i class="pi pi-users icons"></i></a>
+    </li>
+    <li>
+      <a routerLink="tags" [pTooltip]="'Tags'" routerLinkActive="active"><i class="pi pi-tags icons"></i></a>
+    </li>
+    <li>
+      <a routerLink="plans" [pTooltip]="'Plans'" routerLinkActive="active"><i class="pi pi-briefcase icons"></i></a>
+    </li>
+    <li>
+      <a routerLink="products" [pTooltip]="'Products'" routerLinkActive="active"><i class="pi pi-desktop icons"></i></a>
+    </li>
+    <li>
+      <a routerLink="users" [pTooltip]="'Users'" routerLinkActive="active"><i class="pi pi-user-edit icons"></i></a>
+    </li>
+    <li>
+      <a routerLink="usergroups" [pTooltip]="'User Groups'" routerLinkActive="active"><i
+          class="pi pi-user-edit icons"></i></a>
+    </li>
+    <li>
+      <a routerLink="systemmodules" [pTooltip]="'Modules'"><i class="pi pi-sitemap icons"
+          routerLinkActive="active"></i></a>
+    </li>
+  </ul>
+</div>

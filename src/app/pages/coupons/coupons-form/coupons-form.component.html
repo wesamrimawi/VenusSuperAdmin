@@ -1,0 +1,72 @@
+<form [formGroup]="couponForm" (submit)="submitAdd(couponForm.value)">
+ <div class="container-fluid">
+   <div class="grid p-fluid">
+
+     <div class="col-12 md:col-6">
+       <label class="model-label model-label-form">{{'name'|translate}}</label>
+       <input pInputText type="text" class="p-inputtext-md" formControlName="name" required autofocus>
+       <small class="p-error"
+         *ngIf="vf['name'].errors && vf['name'].errors['required']">{{'name_is_required'|translate}}
+       </small>
+     </div>
+
+     <div class="col-12 md:col-6">
+       <label class="model-label model-label-form">{{'code'|translate}}</label>
+       <input pInputText type="text" class="p-inputtext-md" formControlName="code" required>
+       <small class="ng-dirty ng-invalid p-error"
+         *ngIf="vf['code'].errors && vf['code'].errors['required']">{{'code_is_required'|translate}}
+       </small>
+     </div>
+
+     <div class="col-12 md:col-6">
+       <label class="model-label model-label-form">{{'quantity'|translate}}</label>
+       <input pInputText type="text" class="p-inputtext-md" formControlName="quantity" required>
+     </div>
+
+     <div class="col-12 md:col-6">
+       <label class="model-label model-label-form">{{'end_date'|translate}}</label>
+       <p-calendar formControlName="end_date"></p-calendar>
+
+      </div>
+
+     <div class="col-12 md:col-6">
+       <label class="model-label model-label-form">{{'price'|translate}}</label>
+       <p-inputNumber class="p-inputnumber-md" [useGrouping]="false" [minFractionDigits]="3" [min]="0" [max]="1000000"
+         [step]="1" formControlName="price">
+       </p-inputNumber>
+     </div>
+
+   </div>
+   <div class="grid p-fluid">
+     <div class="col-12 md:col-6">
+       <label class="model-label model-label-form">{{'branches'|translate}}</label>
+       <p-multiSelect appendTo="body"  formControlName="branches"
+         defaultLabel="{{'select_branches'|translate}}" display="chip" optionLabel="name" optionValue="id">
+       </p-multiSelect>
+     </div>
+
+     <div class="col-12 md:col-6">
+      <label class="model-label model-label-form">{{'repeat_on_the_same_day'|translate}}</label>
+      <p-selectButton [options]=""   optionLabel="label" optionValue="value" formControlName="repeat_on_the_same_day"></p-selectButton>
+     </div>
+
+     <div class="col-12 md:col-6">
+      <label class="model-label model-label-form">{{'description'|translate}}</label>
+      <input pInputText type="text" class="p-inputtext-md" formControlName="description">
+    </div>
+
+   </div>
+
+
+
+   
+   <div class="grid p-fluid">
+     <div class="col-12">
+       <div class="absolute bottom-0 right-0 p-3">
+         <p-button label="{{'save'|translate}}" [disabled]="couponForm.invalid" type="submit" icon="pi pi-save" styleClass="p-button-success">
+         </p-button>
+       </div>
+     </div>
+   </div>
+ </div>
+</form>

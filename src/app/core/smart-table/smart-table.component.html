@@ -1,0 +1,70 @@
+<div [dir]="'dir'|translate">
+  <p-table #dt1 [columns]="tableColumns" [value]="tableData"
+    styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" [responsive]="true" responsiveLayout="scroll"
+    [dir]="'dir'|translate" styleClass="ui-rtl" tableStyleClass="ui-rtl" [paginator]="checkDataIsEmpty()" [rows]="rows"
+    [rowsPerPageOptions]="[10,25,50]" sortMode="multiple" [globalFilterFields]="filterKeys" [lazy]="lazyMode"
+    [totalRecords]="numberOfTotalRecords" [loading]="showLoader" [rowHover]="true" [scrollable]="true"
+    scrollHeight="flex">
+    <ng-template pTemplate="caption">
+      <div class="grid p-fluid">
+        <div class="field col-12 md:col-6">{{tableTitle}}</div>
+        <div class="field col-12 md:col-6">
+          <div class="p-inputgroup end">
+            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+            <input type="text" #filiter pInputText (input)="dt1.filterGlobal(filiter.value, 'contains')"
+              placeholder="Search">
+          </div>
+
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns >
+      <tr>
+        <th  pSortableColumn="{{col.header}}" *ngFor="let col of columns">
+          {{col.header}}
+          <p-sortIcon field="{{col.header}}"></p-sortIcon>
+        </th>
+        <th>
+          Manage
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          <ng-container *ngIf="col.is_object && rowData[col.field]!=null">{{rowData[col.field][col.sub_field]}}</ng-container>
+          <ng-container *ngIf="!col.is_object">{{rowData[col.field]}}</ng-container>
+          <ng-container *ngIf="col.is_object &&  rowData[col.field]==null">--</ng-container>
+          <!-- <ng-container>{{rowData[col.field][col.object]}}</ng-container>-->
+          <!-- {{rowData[col.field]}}
+          <p class="personaType">{{cardData.names.join(', ')}}</p>-->
+          <!-- <span *ngIf="rowData[col.field][col.object] !== ''; else rowData[col.field]"></span> -->
+          <!-- <span *ngIf="rowData[col.field][col.object] !== ''; else rowData[col.field]">{{rowData[col.field]}}</span> -->
+        </td>
+        <td>
+          <dev class="flex">
+            <button pButton pRipple icon="pi pi-cog" class="p-button-rounded p-button-secondary mr-2" *ngIf="manageButton"
+            (click)="manageButtonClicked(rowData)"></button>
+            <!-- <button pButton pRipple *ngIf="manageButton" type="button" (click)="manageButtonClicked(rowData)"
+              icon="pi pi-cog"></button> -->
+            <!-- <button pButton pRipple type="button"  *ngIf="editButton" (click)="editButtonClicked(rowData)" icon="pi pi-pencil"
+              class="p-button-success"></button> -->
+
+              <button pButton pRipple *ngIf="editButton" icon="pi pi-pencil" class="p-button-rounded " (click)="editButtonClicked(rowData)"></button>
+
+            <!-- <button pButton pRipple type="button" *ngIf="deleteButton" (click)="deleteButtonClicked(rowData)"
+              icon="pi pi-times" class="p-button-danger"></button> -->
+              <button pButton pRipple icon="pi pi-trash" *ngIf="deleteButton "class="p-button-rounded p-button-danger" (click)="deleteButtonClicked(rowData)"></button>
+
+            </dev>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="tableColumns.length+1" class="center">{{noDataText}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>

@@ -1,0 +1,74 @@
+<form [formGroup]="clientForm" (submit)="submitAdd(clientForm.value)" [dir]="'dir'|translate">
+  <div class="grid p-fluid">
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="Name"> {{"name"|translate}} </label>
+      <input pInputText type="text" formControlName="client_name" autofocus />
+      <span class="error"
+        *ngIf="vf['client_name'].errors && vf['client_name'].errors['required']">{{"name_is_required"|translate}}</span>
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <label for="phone_num">{{"mobile"|translate}}</label>
+      <input pInputText type="text" formControlName="mobile" />
+      <span class="error"
+        *ngIf="vf['mobile'].errors && vf['mobile'].errors['required']">{{"mobile_is_required"|translate}}</span>
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <label for="email">{{"email"|translate}}</label>
+      <input id="email" type="email" class="inputfield w-full" pInputText formControlName="email" />
+      <span class="error"
+        *ngIf="vf['email'].errors && vf['email'].errors['required']">{{"email_is_required"|translate}}</span>
+      <span class="error"
+        *ngIf="vf['email'].errors && vf['email'].errors['email']">{{"wrong_email_address"|translate}}</span>
+
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="Notes">{{"note"|translate}}</label>
+      <input pInputText type="text" formControlName="notes" />
+    </div>
+
+    <div class="field col-12 md:col-4 ">
+      <label for="">{{"country"|translate}}</label>
+      <p-dropdown appendTo="body" [options]="allCounties$|async" placeholder="{{'select_item' | translate}}" optionLabel="name"
+        formControlName="country" #country (onChange)="getCityByID(country.value)"></p-dropdown>
+      <span class="error"
+        *ngIf="vf['country'].errors && vf['country'].errors['required']">{{"country_is_required"|translate}}</span>
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="">{{"city"|translate}}</label>
+      <p-dropdown appendTo="body" [options]="allCity$|async" placeholder="{{'select_item' | translate}}"
+        optionLabel="name" formControlName="city">
+      </p-dropdown>
+      <span class="error"
+        *ngIf="vf['city'].errors && vf['city'].errors['required']">{{"city_is_required"|translate}}</span>
+    </div>
+
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="Area">{{"area"|translate}}</label>
+      <input pInputText type="text" formControlName="area" />
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="Street">{{"street"|translate}}</label>
+      <input pInputText type="text" formControlName="street" />
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="Bulding Number">{{"Bulding Number"|translate}}</label>
+      <input pInputText type="text" formControlName="building_number" />
+    </div>
+  </div>
+  <div class="absolute  bottom-0  right-0">
+    <div class="field col-12 md:col-12">
+      <!-- <button pButton type="submit" class="p-button-success" icon="pi pi-plus-circle" [label]="'save'|translate"
+        [disabled]="clientForm.invalid && !editMode"></button> -->
+        <!-- <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"  [disabled]="clientForm.invalid && !editMode"></button> -->
+        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"   [disabled]="clientForm.invalid && !editMode"></button>
+
+    </div>
+  </div>
+</form>

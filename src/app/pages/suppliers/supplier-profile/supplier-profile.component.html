@@ -1,0 +1,117 @@
+<div class="card">
+    <div class="grid">
+        <div class="col-12 p-2">
+            <img src="assets/layout/images/avatar.png" library="roma-layout" />
+        </div>
+        <div class="col-12 md:col-12 p-0">
+            <div class="alignleft pl-2">
+                <h3 class="m-0 ml-2">Mousa Mohmmad</h3>
+            </div>
+            <div class="alignright pr-2">
+                <button class="p-button-rounded mr-2" pButton type="button" (click)="menu.toggle($event)"
+                    icon="pi pi-pencil"></button>
+                <p-menu #menu [popup]="true" [model]="items"></p-menu>
+            </div>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-12">
+            <p-tabView>
+                <p-tabPanel header="Information" leftIcon="pi pi-info">
+                    <div class="grid">
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Name : </span>
+                            <span class="info-content">Mohmmad B. Mousa</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Maobile : </span>
+                            <span class="info-content">0796868555 , 078548558589</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Email : </span>
+                            <span class="info-content">Mousa@gmail.com</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Discount Type : </span>
+                            <span class="info-content">Not Specified</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Discount Amount : </span>
+                            <span class="info-content">0</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Balance : </span>
+                            <span class="info-content">50</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Reference Number : </span>
+                            <span class="info-content">50</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Address : </span>
+                            <span class="info-content">Amman - Jordan , Amman - Jordan , Amman - Jordan, Amman - Jordan,
+                                Amman - Jordan, Amman - Jordan, Amman - Jordan</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Notes : </span>
+                            <span class="info-content">No Notes Right Now</span>
+                        </div>
+                        <div class="profile-info col-12 md:col-6">
+                            <i class="pi pi-info"></i>
+                            <span>Branches : </span>
+                            <span class="info-content">Amman-Abdoun , Irbid</span>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Purchasing Invoices" leftIcon="pi pi-folder">
+                    <ng-template pTemplate="content">
+                        <div class="user-detail">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 md:col-3">
+                                    <div class="card profile-totals">
+                                        <i class="pi pi-dollar"></i>
+                                        <span>Total Invoices : </span>
+                                        <span class="profile-totals-content">3</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 sm:col-6 md:col-3">
+                                    <div class="card profile-totals">
+                                        <i class="pi pi-dollar"></i>
+                                        <span>Total Payments : </span>
+                                        <span class="profile-totals-content">300</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 sm:col-6 md:col-3">
+                                    <div class="card profile-totals">
+                                        <i class="pi pi-dollar"></i>
+                                        <span>Return Value : </span>
+                                        <span class="profile-totals-content">115</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 sm:col-6 md:col-3">
+                                    <div class="card profile-totals">
+                                        <i class="pi pi-dollar"></i>
+                                        <span>Total Not Paid : </span>
+                                        <span class="profile-totals-content">711</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid">
+                                    table of invoices
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>

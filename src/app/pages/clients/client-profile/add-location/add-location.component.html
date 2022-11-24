@@ -1,0 +1,176 @@
+<form [formGroup]="locationForm" (submit)="submitAdd(locationForm.value)" [dir]="'dir'|translate">
+  <div class="grid p-fluid">
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="store_id">{{'stores' |translate }}</label>
+      <p-dropdown appendTo="body" [options]="allStores$|async" placeholder="{{'select_item' |translate }}"
+        formControlName="store_id" optionLabel="store_name"></p-dropdown>
+      <span class="error"
+        *ngIf="vf['store_id'].errors && vf['store_id'].errors['required']">{{'store_is_required' |translate }}</span>
+
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label for="name"> {{"name"|translate}} </label>
+      <input pInputText type="text" formControlName="name">
+      <span class="error"
+        *ngIf="vf['name'].errors && vf['name'].errors['required']">{{'name_is_required' |translate }}</span>
+    </div>
+
+
+    <div class="field col-12 md:col-4 ">
+      <label>{{"mobile"|translate}}</label>
+      <input pInputText id="mobile" formControlName="mobile_number" type="text"/>
+      <span class="error" *ngIf="vf['mobile_number'].errors && vf['mobile_number'].errors['required']">{{'mobile_is_required' |translate }}</span>
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <label>{{"Subscription"|translate}}</label>
+      <p-dropdown appendTo="body" [options]="subscription" placeholder="{{'select_item' |translate }}"
+        formControlName="subscription_type">
+      </p-dropdown>
+      <span class="error"
+        *ngIf="vf['subscription_type'].errors && vf['subscription_type'].errors['required']">{{'subscription_is_required' |translate }}</span>
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <label>{{'contract_date' |translate }}</label>
+      <p-calendar formControlName="contract_date" [showIcon]="true"></p-calendar>
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <label>{{"activation_date"|translate}}</label>
+      <p-calendar formControlName="activation_date"></p-calendar>
+      <span class="error"
+        *ngIf="vf['activation_date'].errors && vf['activation_date'].errors['required']">{{'activation_is_required' |translate }}</span>
+    </div>
+
+
+    <div class="field col-12 md:col-4">
+      <label>{{"expiry_date"|translate}}</label>
+      <p-calendar formControlName="expiry_date"></p-calendar>
+      <span class="error"
+        *ngIf="vf['expiry_date'].errors && vf['expiry_date'].errors['required']">{{'expiry_date_is_required' |translate }}</span>
+    </div>
+
+
+    <div class="field col-12 md:col-4 ">
+      <label>{{"country"|translate}}</label>
+      <p-dropdown appendTo="body" [options]="allCounties$|async" placeholder="{{'select_item' |translate }}"
+        optionLabel="name" formControlName="country_id" #country (onChange)="getCityByID(country.value)"></p-dropdown>
+      <span class="error"
+        *ngIf="vf['country_id'].errors && vf['country_id'].errors['required']">{{'country_is_required' |translate }}</span>
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label>{{"city"|translate}}</label>
+      <p-dropdown appendTo="body" [options]="allCity$|async" placeholder="{{'select_item' |translate }}"
+        optionLabel="name" formControlName="city_id"></p-dropdown>
+      <span class="error"
+        *ngIf="vf['city_id'].errors && vf['city_id'].errors['required']">{{'city_is_required' |translate }}</span>
+    </div>
+
+    <div class="field col-12 md:col-4">
+      <label>{{'business_type' |translate }}</label>
+      <p-dropdown appendTo="body" [options]="allBusinessTypes$|async" placeholder="{{'business_type' |translate }}"
+        id="Zone" optionLabel="name" formControlName="business_type_id"></p-dropdown>
+      <span class="error"
+        *ngIf="vf['business_type_id'].errors && vf['business_type_id'].errors['required']">{{'business_type_is_required' |translate }}</span>
+
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label>{{"address"|translate}}</label>
+      <input pInputText type="text" formControlName="address">
+    </div>
+
+
+    <div class="field col-12 md:col-4 ">
+      <label>{{'reference_number' |translate}}</label>
+      <p-inputNumber formControlName="ref_number"></p-inputNumber>
+    </div>
+
+    <div class="field col-12 md:col-4 ">
+      <label>{{"tag"|translate}}</label>
+      <p-dropdown appendTo="body" [options]="allMainTags$|async" placeholder="{{'select_item' |translate }}"
+        optionLabel="name" optionValue="id" formControlName="tag" (onChange)="getSubTagById($event.value)"></p-dropdown>
+      <span class="error"
+        *ngIf="vf['tag'].errors && vf['tag'].errors['required']">{{'main_tag_is_required' |translate}}</span>
+    </div>
+
+    <div class="field col-12 md:col-4 mb-5">
+      <label>{{"sub_tag"|translate}}</label>
+      <p-dropdown appendTo="body" [options]="subTags$|async" placeholder="{{'select_item' |translate }}"
+        optionLabel="name" formControlName="sub"></p-dropdown>
+      <span class="error"
+        *ngIf="vf['sub'].errors && vf['sub'].errors['required']">{{'sub_tag_is_required' |translate}}</span>
+    </div>
+
+
+    <div class="field col-12 md:col-4">
+      <label for="plan">{{'plan' |translate}}</label>
+      <p-dropdown appendTo="body" [options]="allPlans$|async" placeholder="{{'select_item' |translate }}" id="plan"
+        optionLabel="plan_name" formControlName="plan_id"></p-dropdown>
+      <span class="error"
+        *ngIf="vf['plan_id'].errors && vf['plan_id'].errors['required']">{{'plan_is_required' |translate}}</span>
+    </div>
+
+
+    <div class="field col-12 md:col-4">
+      <label>{{"status"|translate}}</label>
+      <p-selectButton [options]="status" optionLabel="label" optionValue="value" formControlName="status">
+      </p-selectButton>
+      <span class="error"
+        *ngIf="vf['status'].errors && vf['status'].errors['required']">{{'status_is_required' |translate}}</span>
+    </div>
+
+  </div>
+  <div class="absolute  bottom-0  right-0">
+    <div class="field col-12 md:col-12">
+      
+        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"   [disabled]="locationForm.invalid  "></button>
+
+    </div>
+
+  </div>
+
+</form>
+
+
+
+<!-- <div class="field col-12 md:col-4 ">
+  <label for="">{{"tag"|translate}}</label>
+  <p-dropdown appendTo="body" [options]="allMainTags$|async" placeholder="{{'select_item' | translate}}" optionLabel="name"
+    formControlName="tag" #tag (onChange)="getSubTagById(tag.value)"></p-dropdown>
+  <span class="error"
+    *ngIf="vf['tag'].errors && vf['tag'].errors['required']">{{"tag"|translate}}</span>
+</div> -->
+
+<!-- <div class="field col-12 md:col-4 mb-5">
+  <label for="">{{"sub"|translate}}</label>
+  <p-dropdown appendTo="body" [options]="subTags$|async" placeholder="{{'select_item' | translate}}"
+    optionLabel="name" formControlName="sub">
+  </p-dropdown>
+  <span class="error"
+    *ngIf="vf['sub'].errors && vf['sub'].errors['required']">{{"sub"|translate}}</span>
+</div>
+
+ -->
+
+
+
+<!-- <div class="field col-12 md:col-4 ">
+  <label>{{"tag"|translate}}</label>
+  <p-dropdown appendTo="body" [options]="allMainTags$|async" placeholder="{{'select_item' |translate }}"
+    optionLabel="name" formControlName="mainTag" #tag (onChange)="getSubTagById(tag.value)"></p-dropdown>
+  <span class="error"
+    *ngIf="vf['main_tag_id'].errors && vf['main_tag_id'].errors['required']">{{'main_tag_is_required' |translate}}</span>
+</div>
+
+<div class="field col-12 md:col-4 mb-5">
+  <label>{{"sub_tag"|translate}}</label>
+  <p-dropdown appendTo="body" [options]="subTags$|async" placeholder="{{'select_item' |translate }}"
+    optionLabel="name" formControlName="subTag"></p-dropdown>
+  <span class="error"
+    *ngIf="vf['subTag'].errors && vf['subTag'].errors['required']">{{'sub_tag_is_required' |translate}}</span>
+</div>
+-->

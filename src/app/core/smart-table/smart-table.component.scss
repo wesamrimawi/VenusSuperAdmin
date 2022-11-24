@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.center {
+  text-align: center !important;
+  padding: 5px !important;
+}
+
+.end{
+  justify-content: end;
+}
+
+:host ::ng-deep {
+
+  .p-splitbutton .p-splitbutton-defaultbutton,
+  .p-splitbutton.p-button-rounded > .p-splitbutton-defaultbutton.p-button,
+  .p-splitbutton.p-button-outlined > .p-splitbutton-defaultbutton.p-button {
+    display: none !important;
+    background-color: aqua !important;
+  }
+
+  .p-splitbutton.p-button-warning > .p-button {
+    padding: 12px 35px !important;
+    border-radius: 50px;
+  }
+
+  .p-datatable .p-datatable-sm .p-datatable-thead > tr > th,
+  .p-datatable .p-datatable-sm .p-datatable-tbody > tr > td {
+    justify-content: center;
+  }
+
+}

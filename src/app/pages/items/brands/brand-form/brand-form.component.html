@@ -1,0 +1,45 @@
+<form [formGroup]="brandForm" (submit)="submitAdd(brandForm.value)" [dir]="'dir'|translate">
+ <div class="container-fluid">
+   <div class="grid p-fluid">
+
+     <div class="col-12 md:col-6">
+       <label class="model-label model-label-form">{{'name'|translate}}</label>
+       <small class="p-error"
+         *ngIf="vf['name'].errors && vf['name'].errors['required']"><span>&nbsp;{{'*'|translate}}</span>
+       </small>
+       <input pInputText type="text" class="p-inputtext-md" formControlName="name" autofocus>
+     </div>
+
+     <div class="col-12 md:col-6">
+      <label class="model-label model-label-form">{{'discount_value'|translate}}</label>
+      <input pInputText type="text" class="p-inputtext-md" formControlName="discount_value">
+    </div>
+
+    <div class="col-12 md:col-6">
+      <label class="model-label model-label-form">{{'discount_type' |translate}}</label>
+      <p-selectButton [options]=""   optionLabel="label" optionValue="value" formControlName="discount_type"></p-selectButton>
+
+  </div>
+
+    <div class="col-12 md:col-6">
+     <label class="model-label model-label-form">{{'branches'|translate}}</label>
+     <small class="p-error"
+       *ngIf="vf['branches'].errors && vf['branches'].errors['required']"><span>&nbsp;{{'*'|translate}}</span>
+     </small>
+     <p-multiSelect appendTo="body"  formControlName="branches"
+       defaultLabel="{{'branches'|translate}}" display="chip" optionLabel="name" optionValue="id">
+     </p-multiSelect>
+    </div>
+    </div>
+
+   </div>
+   
+   <div class="grid p-fluid">
+     <div class="col-12 md:col-12 flex justify-content-end" >
+       <div class="absolute bottom-0 p-3">
+         <p-button label="{{'save'|translate}}" [disabled]="brandForm.invalid" type="submit" icon="pi pi-save" styleClass="p-button-success">
+         </p-button>
+       </div>
+     </div>
+   </div>
+</form>

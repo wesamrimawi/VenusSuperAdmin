@@ -1,0 +1,26 @@
+<div class="grid" [dir]="'dir'|translate">
+    <div *ngIf="!mobileFlage" class="row">
+        <div class="col-8">
+            <div class="card">
+                <smart-table [data]="transactionList$|async" [columns]="tableCols" [filters]="tableFilters"
+                    [title]="tableTitle" [manageButton]="true" [deleteButton]="false" [editButton]="false" (manageClicked)="selectInvoice($event)"></smart-table>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <span [innerHTML]="invoiceHTML"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- for mobile -->
+    <div *ngIf="mobileFlage" class="row">
+        <div class="col-12">
+            <div class="card">
+                <smart-table [data]="transactionList$|async" [columns]="tableCols" [filters]="tableFilters"
+                    [title]="tableTitle" [manageButton]="true" [deleteButton]="false" [editButton]="false" (manageClicked)="selectInvoice($event)"></smart-table>
+            </div>
+        </div>
+    </div>
+    <!-- end -->
+</div>

@@ -1,0 +1,11 @@
+import { DeliveryRolesComponent } from './delivery-roles.component';
+import { NgModule, Component } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [{path:'' , component:DeliveryRolesComponent}];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class DeliveryRolesRoutingModule { }
