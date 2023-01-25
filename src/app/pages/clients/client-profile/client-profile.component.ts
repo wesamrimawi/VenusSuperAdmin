@@ -18,7 +18,6 @@ import { map } from 'rxjs/operators';
   templateUrl: './client-profile.component.html',
   styleUrls: ['./client-profile.component.scss'],
   providers: [MessageService, DialogService]
-
 })
 export class ClientProfileComponent implements OnInit {
   storeList$: Observable<Store[] | any> = of([]);

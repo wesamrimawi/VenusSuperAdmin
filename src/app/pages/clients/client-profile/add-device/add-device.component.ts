@@ -76,7 +76,8 @@ export class AddDeviceComponent implements OnInit {
       device_name: formValues.name,
       serial_number: formValues.serial_number,
       product_id: formValues.product_id.id,
-      branch_ids: selected_branches
+      branch_ids: selected_branches.map(br => +br.id),
+      store_id: +selected_branches[0]?.store?.id
     }
 
     if (this.editMode) {
