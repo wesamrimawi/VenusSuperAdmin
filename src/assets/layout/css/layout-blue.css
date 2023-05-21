@@ -993,7 +993,9 @@ a {
   margin-left: 1.5em;
 }
 .layout-wrapper .layout-topbar .layout-topbar-logo img {
-  height: 24px;
+  /* height: 24px; */
+  height: 50px;
+  width: auto;
 }
 .layout-wrapper .layout-topbar .layout-topbar-search {
   position: relative;
@@ -1882,7 +1884,10 @@ a {
     margin-left: 1em;
   }
   .layout-wrapper .layout-topbar .layout-topbar-logo img {
-    height: 16px;
+    /* height: 16px; */
+
+    height: 50px;
+    width: auto;
   }
   .layout-wrapper .layout-menu-container {
     top: 110px;
