@@ -55,7 +55,7 @@ export class AddDeviceComponent implements OnInit {
   initDeviceForm = (): void => {
     this.deviceForm = this._fb.group({
       name: ['', Validators.required],
-      serial_number: ['', Validators.required],
+      serial_number: [''],
       product_id: ['', Validators.required],
       branches: [[], Validators.required]
     });

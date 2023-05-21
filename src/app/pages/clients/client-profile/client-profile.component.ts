@@ -114,10 +114,12 @@ export class ClientProfileComponent implements OnInit {
   }
 
 
-  editProfileUser = () => {
+  editProfileClient = () => {
+    this._apiService.apiName = 'clients';
     this.dialogService.open(AddClientComponent, {
-      header: 'Edit Client Profile',
-      width: '50%',
+      header: this._translate.instant('edit_client_profile'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       data: { editMode: true, details: this.clientInfo },
@@ -133,8 +135,9 @@ export class ClientProfileComponent implements OnInit {
 
   editClientStore = (data: Store) => {
     this.dialogService.open(AddStoreComponent, {
-      header: 'Edit Client Store',
-      width: '50%',
+      header: this._translate.instant('edit_client_store'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       data: { editMode: true, details: data },
@@ -150,8 +153,9 @@ export class ClientProfileComponent implements OnInit {
 
   editClientBranch = (data: Store) => {
     this.dialogService.open(AddLocationComponent, {
-      header: 'Edit Client Branch',
-      width: '50%',
+      header: this._translate.instant('edit_client_branch'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       data: { editMode: true, details: data },
@@ -167,8 +171,9 @@ export class ClientProfileComponent implements OnInit {
 
   editClientDevice = (data: Store) => {
     this.dialogService.open(AddDeviceComponent, {
-      header: 'Edit Client Device',
-      width: '50%',
+      header: this._translate.instant('edit_client_device'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       data: { editMode: true, details: data },
@@ -185,8 +190,9 @@ export class ClientProfileComponent implements OnInit {
 
   addStoreDialog = () => {
     this.dialogService.open(AddStoreComponent, {
-      header: 'Add Store',
-      width: '50%',
+      header: this._translate.instant('add_store'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       closable: true
@@ -203,8 +209,9 @@ export class ClientProfileComponent implements OnInit {
 
   addDeviceDialog = () => {
     this.dialogService.open(AddDeviceComponent, {
-      header: 'Add Device',
-      width: '60%',
+      header: this._translate.instant('add_device'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       closable: true
@@ -219,7 +226,8 @@ export class ClientProfileComponent implements OnInit {
   addBranchesDialog = () => {
     this.dialogService.open(AddLocationComponent, {
       header: 'Add Branches Details',
-      width: '70%',
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "auto" },
       baseZIndex: 10000,
       closable: true
