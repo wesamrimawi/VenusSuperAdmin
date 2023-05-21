@@ -8,6 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
+import { Languages } from 'src/app/enum/languages.enum';
 @Component({
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss'],
@@ -21,6 +22,7 @@ export class TagsComponent implements OnInit {
   closeDialogSubs: Subscription = new Subscription();
   tableCols: any = [];
   title = this._translate.instant('tags_table_title');
+  
   constructor(private _translate: TranslateService, private _cdr: ChangeDetectorRef, private _router: Router, private _apiService: ApiService, private readonly _dialogService: DialogService, private readonly _messageService: MessageService) {
     this._apiService.apiName = 'tags';
   }
@@ -29,28 +31,6 @@ export class TagsComponent implements OnInit {
     this.initTableColsHeader();
     this.loadAllTags();
   }
-
-  showEditDialog = async (e: any) => {
-    this._apiService.apiName = 'tags';
-    const response = await this._apiService.getById(e.id).toPromise();
-    if (response?.error_code === 0) {
-      this._dialogService.open(AddTagComponent, {
-        header: this._translate.instant('edit_tag'),
-        width: '50%',
-        contentStyle: { "overflow": "hidden" },
-        baseZIndex: 10000,
-        data: { editMode: true, details: response?.data },
-        closable: true
-      }).onClose.subscribe(edited => {
-        if (edited) {
-          this.loadAllTags();
-          this._messageService.add({ severity: 'success', summary: 'plan successfully Updated' });
-          this._cdr.detectChanges();
-        }
-      });
-    }
-  }
-
 
   private initTableColsHeader = (): void => {
     this.tableCols = [
@@ -67,11 +47,13 @@ export class TagsComponent implements OnInit {
 
   showAddDialog = (): void => {
     this.closeDialogSubs = this._dialogService.open(AddTagComponent, {
-      header: 'Add Data',
-      width: '50%',
-      height: '50%',
-      contentStyle: { "overflow": "hidden" },
-      baseZIndex: 10000
+      header: this._translate.instant('add_tag'),
+      width: '90%',
+      height: '60%',
+      contentStyle: { "overflow-y": "scroll" },
+      rtl: this._translate.currentLang === Languages.AR,
+      baseZIndex: 10000,
+      closable: true
     }).onClose.subscribe(added => {
       if (added) {
         this.loadAllTags();
@@ -80,6 +62,30 @@ export class TagsComponent implements OnInit {
       }
     });
   }
+
+  showEditDialog = async (e: any) => {
+    this._apiService.apiName = 'tags';
+    const response = await this._apiService.getById(e.id).toPromise();
+    if (response?.error_code === 0) {
+      this._dialogService.open(AddTagComponent, {
+        header: this._translate.instant('edit_tag'),
+        width: '90%',
+        height: '60%',
+        contentStyle: { "overflow-y": "scroll" },
+        rtl: this._translate.currentLang === Languages.AR,
+        baseZIndex: 10000,
+        data: { editMode: true, details: response?.data },
+        closable: true
+      }).onClose.subscribe(edited => {
+        if (edited) {
+          this.loadAllTags();
+          this._messageService.add({ severity: 'success', summary: 'plan successfully Updated' });
+          this._cdr.detectChanges();
+        }
+      });
+    }
+  }
+
 
   deleteTag = (data: Tag): void => {
     this._apiService.delete(data.id).subscribe((response) => {

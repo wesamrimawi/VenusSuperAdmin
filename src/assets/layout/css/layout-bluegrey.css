@@ -99,7 +99,7 @@ body {
   left: 0px;
   width: 15px;
   height: 15px;
-  background: #0772B3;
+  background:#212656;
   border-radius: 50%;
 }
 .loader li.dot-a {
@@ -393,7 +393,7 @@ a {
   color: #ffffff;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar {
-  background-color: #0772B3;
+  background-color:#212656;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-icon {
   color: #ffffff;
@@ -402,10 +402,10 @@ a {
   background-color: #054e7a;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-search {
-  background-color: #0772B3;
+  background-color:#212656;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-search input {
-  background-color: #0772B3;
+  background-color:#212656;
   color: #ffffff;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-search input::-webkit-input-placeholder {
@@ -2209,7 +2209,7 @@ a {
   text-align: center;
   border: 30px solid #0f97c7;
   border-left-color: #1cb9d7;
-  border-tocolor: #0772b3;
+  border-tocolor:#212656;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -2246,7 +2246,7 @@ a {
   color: #1cb9d7;
 }
 .layout-dashboard .expenses .expenses-legend > div:nth-child(3) i {
-  color: #0772b3;
+  color:#212656;
 }
 .layout-dashboard .expenses .expenses-footer {
   text-align: right;

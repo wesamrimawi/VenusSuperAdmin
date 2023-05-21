@@ -31,25 +31,7 @@ export class UsersComponent implements OnInit {
     this.loadAllUsers();
   }
 
-  showEditDialog = async (e: any) => {
-    const response = await this._apiService.getById(e.id).toPromise();
-    if (response?.error_code === 0) {
-      this._dialogService.open(AddUserComponent, {
-        header: this._translate.instant('edit_user'),
-        width: '50%',
-        contentStyle: { "overflow": "hidden" },
-        baseZIndex: 10000,
-        data: { editMode: true, details: response?.data },
-        closable: true
-      }).onClose.subscribe(edited => {
-        if (edited) {
-          this.loadAllUsers();
-          this._messageService.add({ severity: 'success', summary: 'plan successfully Updated' });
-          this._cdr.detectChanges();
-        }
-      });
-    }
-  }
+
 
   private initTableCols = (): void => {
     this.tableCols = [
@@ -68,8 +50,8 @@ export class UsersComponent implements OnInit {
   showAddDialog = (): void => {
     this.closeDialogSubs = this._dialogService.open(AddUserComponent, {
       header: this._translate.instant('add_user'),
-      width: '60%',
-      height: '85%',
+      width: '90%',
+      height: '75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000
     }).onClose.subscribe(added => {
@@ -79,6 +61,27 @@ export class UsersComponent implements OnInit {
         this._cdr.detectChanges();
       }
     });
+  }
+
+  showEditDialog = async (e: any) => {
+    const response = await this._apiService.getById(e.id).toPromise();
+    if (response?.error_code === 0) {
+      this._dialogService.open(AddUserComponent, {
+        header: this._translate.instant('edit_user'),
+        width: '90%',
+        height: '75%',
+        contentStyle: { "overflow": "hidden" },
+        baseZIndex: 10000,
+        data: { editMode: true, details: response?.data },
+        closable: true
+      }).onClose.subscribe(edited => {
+        if (edited) {
+          this.loadAllUsers();
+          this._messageService.add({ severity: 'success', summary: 'plan successfully Updated' });
+          this._cdr.detectChanges();
+        }
+      });
+    }
   }
 
   deleteUser = (data: User): void => {

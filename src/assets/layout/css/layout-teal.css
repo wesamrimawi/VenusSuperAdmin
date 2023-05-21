@@ -1989,7 +1989,7 @@ a {
   font-weight: 500;
   color: #252529;
   background-color: #ffffff;
-  border-bottom: 2px solid #0f97c7;
+  border-bottom: 2px solid #212656;
 }
 .layout-right-panel .status-title {
   margin: 24px 0 12px 0;
@@ -2207,7 +2207,7 @@ a {
   font-size: 30px;
   margin: 0 auto;
   text-align: center;
-  border: 30px solid #0f97c7;
+  border: 30px solid #212656;
   border-left-color: #1cb9d7;
   border-tocolor: #0772b3;
   -moz-border-radius: 50%;
@@ -2240,7 +2240,7 @@ a {
   font-size: 12px;
 }
 .layout-dashboard .expenses .expenses-legend > div:nth-child(1) i {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-dashboard .expenses .expenses-legend > div:nth-child(2) i {
   color: #1cb9d7;
@@ -2290,7 +2290,7 @@ a {
   vertical-align: middle;
 }
 .layout-dashboard .timeline ul li:nth-child(1) i {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-dashboard .timeline ul li:nth-child(2) i {
   color: #1cb9d7;
@@ -2316,7 +2316,7 @@ a {
   margin: 1em 0;
 }
 .layout-dashboard .tasks p .task-highlight {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-dashboard .tasks ul {
   padding: 0;
@@ -2339,7 +2339,7 @@ a {
   vertical-align: middle;
 }
 .layout-dashboard .tasks ul .task-badge-open {
-  color: #0f97c7;
+  color: #212656;
   float: right;
   margin-top: 0.25em;
   font-weight: 500;
@@ -2699,7 +2699,7 @@ a {
   vertical-align: middle;
 }
 .timeline ul li:nth-child(1) i {
-  color: #0f97c7;
+  color: #212656;
 }
 .timeline ul li:nth-child(2) i {
   color: #1cb9d7;
@@ -3055,7 +3055,7 @@ a {
   background-position: bottom;
 }
 .exception-body.notfound .exception-panel {
-  border-left: #0f97c7 solid 23px;
+  border-left: #212656 solid 23px;
 }
 .exception-body.accessdenied {
   background: url("../../layout/images/pages/accessdenied-bg.jpg");
@@ -3262,7 +3262,7 @@ a {
 }
 .landing-body .landing-wrapper .landing-news button {
   background-color: #ffffff;
-  color: #0f97c7;
+  color: #212656;
   padding: 8px 24px;
 }
 .landing-body .landing-wrapper .landing-pricing {

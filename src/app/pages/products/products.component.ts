@@ -57,12 +57,31 @@ export class ProductsComponent implements OnInit {
   }
 
 
+
+
+  showAddDialog = (): void => {
+    this.closeDialogSubs = this._dialogService.open(AddProductComponent, {
+      header: this._translate.instant('add_product'),
+      width: '90%',
+      height: '75%',
+      contentStyle: { "overflow": "hidden" },
+      baseZIndex: 10000
+    }).onClose.subscribe(added => {
+      if (added) {
+        this.loadAllProducts();
+        this._messageService.add({ severity: 'success', summary: 'product successfully added' });
+        this._cdr.detectChanges();
+      }
+    });
+  }
+
   showEditDialog = async (e: any) => {
     const response = await this._apiService.getById(e.id).toPromise();
     if (response?.error_code === 0) {
       this._dialogService.open(AddProductComponent, {
-        header: 'Edit Product',
-        width: '50%',
+        header: this._translate.instant('edit_product'),
+        width: '90%',
+        height: '75%',
         contentStyle: { "overflow": "hidden" },
         baseZIndex: 10000,
         data: { editMode: true, details: response?.data},
@@ -77,24 +96,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  showAddDialog = (): void => {
-    this.closeDialogSubs = this._dialogService.open(AddProductComponent, {
-      header: this._translate.instant('add_product'),
-      width: '60%',
-      contentStyle: { "overflow": "hidden" },
-      baseZIndex: 10000
-    }).onClose.subscribe(added => {
-      if (added) {
-        this.loadAllProducts();
-        this._messageService.add({ severity: 'success', summary: 'product successfully added' });
-        this._cdr.detectChanges();
-      }
-    });
-  }
-
-  manageClientDetails = (): void => {
-    this._router.navigate(['/user_profile']);
-  }
 
   deleteProduct = (data: Product): void => {
     this._apiService.delete(data.id).subscribe((response) => {
@@ -104,6 +105,13 @@ export class ProductsComponent implements OnInit {
       }
     })
   }
+  
+
+  manageClientDetails = (): void => {
+    this._router.navigate(['/user_profile']);
+  }
+
+
 
   ngOnDestroy(): void {
     this.closeDialogSubs && !this.closeDialogSubs.closed && this.closeDialogSubs.unsubscribe();
