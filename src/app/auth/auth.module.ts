@@ -8,6 +8,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OverlayPanelModule } from "primeng/overlaypanel";
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ButtonModule,
     InputTextModule,
     ReactiveFormsModule,
+    OverlayPanelModule,
+    SidebarModule
 
   ]
 })
