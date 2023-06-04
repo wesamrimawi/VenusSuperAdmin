@@ -53,7 +53,7 @@
         <p-tabPanel header="Store" leftIcon="pi pi-building" class="w-100">
             <!-- table store -->
             <div class="add-btn mb-3 flex flex-row-reverse">
-              <button pButton type="button" class="p-button-warning" icon="pi pi-plus-circle" label="Add Store Details"
+              <button pButton type="button" class="p-button-warning" icon="pi pi-plus-circle" label="Add Store Name"
                 (click)="addStoreDialog()">
               </button>
             </div>
@@ -92,3 +92,4 @@
 
 
 </div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
