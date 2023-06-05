@@ -74,6 +74,12 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['clients'],
                         routerLinkActiveOptions: 'exact:true'
                     },
+                    {
+                        label: this._translate.instant('Clients Details'),
+                        icon: 'pi pi-users icons',
+                        routerLink: ['clients-details'],
+                        routerLinkActiveOptions: 'exact:true'
+                    },
                     // {
                     //     label: this._translate.instant('Clients'),
                     //     icon: 'pi pi-fw pi-dollar',

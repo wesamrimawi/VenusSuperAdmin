@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: 'clients', canActivate: [PermissionGuard], data: { pageName: 'clients' }, loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule) },
       { path: 'systemmodules', canActivate: [PermissionGuard], data: { pageName: 'systemmodules' }, loadChildren: () => import('./system-modules/system-modules.module').then(m => m.SystemModulesModule) },
       { path: 'clientprofile', canActivate: [PermissionGuard], data: { pageName: 'clientprofile' }, loadChildren: () => import('./clients/client-profile/client-profile.module').then(m => m.ClientProfileModule) },
-  
+      {path: 'clients-details', canActivate: [PermissionGuard], data: {pageName: 'clients-details'}, loadChildren: () => import('./clients-details/clients-details.module').then(m=> m.ClientsDetailsModule)}
 
     ]
   },
