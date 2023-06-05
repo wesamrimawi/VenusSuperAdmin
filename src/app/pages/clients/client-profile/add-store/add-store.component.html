@@ -3,37 +3,43 @@
   <div class="grid p-fluid">
     <div class="field col-12 md:col-6 mb-5">
       <label for="name">{{"name"|translate}}</label>
+      <small class="ng-dirty ng-invalid p-error"
+        *ngIf="vf['name'].errors && vf['name'].errors['required']"><span>&nbsp;*</span>
+      </small>
       <input pInputText type="text" formControlName="name" autofocus>
-      <span class="error" *ngIf="vf['name'].errors && vf['name'].errors['required']">Name Is Required</span>
-
     </div>
 
     <div class="field col-12 md:col-6 ">
       <label for="code">{{"code"|translate}}</label>
+      <small class="ng-dirty ng-invalid p-error"
+      *ngIf="vf['code'].errors && vf['code'].errors['required']"><span>&nbsp;*</span>
+    </small>
+
       <p-inputNumber mode="decimal" [useGrouping]="false" formControlName="code" value=""  [disabled]="editMode"></p-inputNumber>
-      <span class="error" *ngIf="vf['code'].errors && vf['code'].errors['required'] && !editMode">Code Is Required</span>
       <span class="error" *ngIf="vf['code'].errors && vf['code'].errors['codeExist'] && !editMode">Code Is Exist</span>
     </div>
 
     <div class="field col-12 md:col-6 ">
       <label for="mobile">{{"mobile"|translate}}</label>
       <p-inputNumber mode="decimal" [useGrouping]="false" formControlName="mobile_number" value=""></p-inputNumber>
-      <span class="error" *ngIf="vf['mobile_number'].errors && vf['mobile_number'].errors['required']">Mobile Is
-        Required</span>
+      <!-- <span class="error" *ngIf="vf['mobile_number'].errors && vf['mobile_number'].errors['required']">Mobile Is
+        Required</span> -->
     </div>
 
     <div class="field col-12 md:col-6 ">
       <label for="email">{{"email"|translate}}</label>
       <input id="email" type="email" class="inputfield w-full" pInputText formControlName="email">
-      <span class="error"
-        *ngIf="vf['email'].errors && vf['email'].errors['email']">{{"wrong_email_address"|translate}}</span>
+      <small class="ng-dirty ng-invalid p-error"
+        *ngIf="vf['email'].errors && vf['email'].errors['email']">{{"wrong_email_address"|translate}}
+      </small>
     </div>
 
   </div>
   <div class="absolute  bottom-0  right-0">
     <div class="field col-12 md:col-12">
-        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"   [disabled]="storeForm.invalid && !editMode "></button>
-
+        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"  
+         [disabled]="storeForm.invalid && !editMode ">
+        </button>
     </div>
 
 

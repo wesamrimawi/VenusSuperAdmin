@@ -14,10 +14,12 @@ import { AddDeviceComponent } from './add-device/add-device.component';
 import { AddLocationComponent } from './add-location/add-location.component';
 import { AddStoreComponent } from './add-store/add-store.component';
 import { map } from 'rxjs/operators';
+import { ConfirmationService, Message } from 'primeng/api';
+
 @Component({
   templateUrl: './client-profile.component.html',
   styleUrls: ['./client-profile.component.scss'],
-  providers: [MessageService, DialogService]
+  providers: [MessageService, DialogService, ConfirmationService]
 })
 export class ClientProfileComponent implements OnInit {
   storeList$: Observable<Store[] | any> = of([]);
@@ -32,7 +34,7 @@ export class ClientProfileComponent implements OnInit {
   filiterStore: Store[] = [];
   filiterDevice: Device[] = [];
   filiterBranches: Branch[] = []
-  constructor(private readonly _messageService: MessageService, private _activatedRoute: ActivatedRoute, private _cdr: ChangeDetectorRef, public dialogService: DialogService, public messageService: MessageService, private _apiService: ApiService, private _translate: TranslateService) {
+  constructor(private confirmationService: ConfirmationService, private readonly _messageService: MessageService, private _activatedRoute: ActivatedRoute, private _cdr: ChangeDetectorRef, public dialogService: DialogService, public messageService: MessageService, private _apiService: ApiService, private _translate: TranslateService) {
     this._activatedRoute.queryParams.subscribe(params => {
       this.clientId = +params['id'];
     });
@@ -114,10 +116,12 @@ export class ClientProfileComponent implements OnInit {
   }
 
 
-  editProfileUser = () => {
+  editProfileClient = () => {
+    this._apiService.apiName = 'clients';
     this.dialogService.open(AddClientComponent, {
-      header: 'Edit Client Profile',
-      width: '50%',
+      header: this._translate.instant('edit_client_profile'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       data: { editMode: true, details: this.clientInfo },
@@ -133,8 +137,9 @@ export class ClientProfileComponent implements OnInit {
 
   editClientStore = (data: Store) => {
     this.dialogService.open(AddStoreComponent, {
-      header: 'Edit Client Store',
-      width: '50%',
+      header: this._translate.instant('edit_client_store'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       data: { editMode: true, details: data },
@@ -150,8 +155,9 @@ export class ClientProfileComponent implements OnInit {
 
   editClientBranch = (data: Store) => {
     this.dialogService.open(AddLocationComponent, {
-      header: 'Edit Client Branch',
-      width: '50%',
+      header: this._translate.instant('edit_client_branch'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       data: { editMode: true, details: data },
@@ -167,8 +173,9 @@ export class ClientProfileComponent implements OnInit {
 
   editClientDevice = (data: Store) => {
     this.dialogService.open(AddDeviceComponent, {
-      header: 'Edit Client Device',
-      width: '50%',
+      header: this._translate.instant('edit_client_device'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       data: { editMode: true, details: data },
@@ -185,8 +192,9 @@ export class ClientProfileComponent implements OnInit {
 
   addStoreDialog = () => {
     this.dialogService.open(AddStoreComponent, {
-      header: 'Add Store',
-      width: '50%',
+      header: this._translate.instant('add_store'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       closable: true
@@ -203,8 +211,9 @@ export class ClientProfileComponent implements OnInit {
 
   addDeviceDialog = () => {
     this.dialogService.open(AddDeviceComponent, {
-      header: 'Add Device',
-      width: '60%',
+      header: this._translate.instant('add_device'),
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "hidden" },
       baseZIndex: 10000,
       closable: true
@@ -219,7 +228,8 @@ export class ClientProfileComponent implements OnInit {
   addBranchesDialog = () => {
     this.dialogService.open(AddLocationComponent, {
       header: 'Add Branches Details',
-      width: '70%',
+      width: '90%',
+      height:'75%',
       contentStyle: { "overflow": "auto" },
       baseZIndex: 10000,
       closable: true
@@ -233,32 +243,65 @@ export class ClientProfileComponent implements OnInit {
 
 
   deleteStore = (data: Store): void => {
-    this._apiService.apiName = `clients/${this.clientId}/stores/`;
-    this._apiService.delete(data.id).subscribe((response) => {
-      if (response.error_message == 'success') {
-        this.loadAllStore();
-        this._cdr.detectChanges();
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this record?',
+      icon: 'pi pi-info-circle',
+      acceptLabel: 'Yes',
+      rejectLabel: 'No',
+      accept: () => {
+        this._apiService.apiName = `clients/${this.clientId}/stores/`;
+        this._apiService.delete(data.id).subscribe((response) => {
+          if (response.error_message == 'success') {
+            this.loadAllStore();
+            this._cdr.detectChanges();
+          }
+        });
+      },
+      reject: () => {
+        return;
       }
-    });
+    })
   }
 
   deleteBranch = (data: Branch): void => {
-    this._apiService.apiName = `clients/${this.clientId}/branches/`;
-    this._apiService.delete(data.id).subscribe((response) => {
-      if (response.error_message == 'success') {
-        this.loadAllBranch();
-        this._cdr.detectChanges();
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this record?',
+      icon: 'pi pi-info-circle',
+      acceptLabel: ' Yes',
+      rejectLabel: 'No',
+      accept: () => {
+        this._apiService.apiName = `clients/${this.clientId}/branches/`;
+        this._apiService.delete(data.id).subscribe((response) => {
+          if (response.error_message == 'success') {
+            this.loadAllBranch();
+            this._cdr.detectChanges();
+          }
+        });
+      },
+      reject: () => {
+        return;
       }
-    });
+    })
   }
 
   deleteDevice = (data: Device): void => {
-    this._apiService.apiName = `clients/${this.clientId}/devices/`;
-    this._apiService.delete(data.id).subscribe((response) => {
-      if (response.error_message == 'success') {
-        this.loadAllDevice();
-        this._cdr.detectChanges();
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this record?',
+      icon: 'pi pi-info-circle',
+      acceptLabel: 'Yes',
+      rejectLabel: 'No',
+      accept: () => {
+        this._apiService.apiName = `clients/${this.clientId}/devices/`;
+        this._apiService.delete(data.id).subscribe((response) => {
+          if (response.error_message == 'success') {
+            this.loadAllDevice();
+            this._cdr.detectChanges();
+          }
+        });
+      },
+      reject: () => {
+        return;
       }
-    });
+    })
   }
 }

@@ -1,20 +1,27 @@
 <form [formGroup]="planForm" (submit)="submitAdd(planForm.value)" [dir]="'dir'|translate">
   <div class="grid p-fluid">
-    <div class="field col-12 md:col-6 mb-5">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-4">
       <label for="plan_name">{{'name'|translate}}</label>
+      <small class="ng-dirty ng-invalid p-error"
+        *ngIf="vf['plan_name'].errors && vf['plan_name'].errors['required']"><span>&nbsp;*</span>
+      </small>
       <input pInputText formControlName="plan_name" id="plan_name" type="text" autofocus />
-      <span class="error"
-        *ngIf="vf['plan_name'].errors && vf['plan_name'].errors['required']">{{'name_is_required'|translate}}</span>
     </div>
-    <div class="field col-12 md:col-6 mb-5">
+
+
+    <div class="col-12 sm:col-6 md:col-6 lg:col-4">
       <label for="system_module_ids">{{'system_module_ids'|translate}}</label>
+      <small class="ng-dirty ng-invalid p-error"
+        *ngIf="vf['system_module_ids'].errors && vf['system_module_ids'].errors['required']"><span>&nbsp;*</span>
+      </small>
+    
       <p-multiSelect  appendTo="body" styleClass="dd-style" [options]="systemModulesList$|async"
         defaultLabel="{{'select_system_module'|translate}}" optionLabel="name"
         display="chip" formControlName="system_module_ids" id="system_module_ids"></p-multiSelect>
-      <span class="error"
-        *ngIf="vf['system_module_ids'].errors && vf['system_module_ids'].errors['required']">{{'system_module_is_required'|translate}}</span>
     </div>
+
   </div>
+
   <div class="absolute  bottom-0  right-0">
     <div class="field col-12 md:col-12">
      <button pButton pRipple label="{{'save'|translate}}" icon="pi pi-check"  [disabled]="planForm.invalid && !editMode"></button>

@@ -10,7 +10,11 @@
 .end{
   justify-content: end;
 }
+.tabel-titel{
+  text-transform: uppercase;
+  color: #495057;
 
+}
 :host ::ng-deep {
 
   .p-splitbutton .p-splitbutton-defaultbutton,

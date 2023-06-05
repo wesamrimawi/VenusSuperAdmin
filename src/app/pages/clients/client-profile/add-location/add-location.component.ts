@@ -93,7 +93,7 @@ export class AddLocationComponent implements OnInit {
     this.locationForm = this._fb.group({
       store_id: ['', Validators.required],
       name: ['', Validators.required],
-      mobile_number: ['', Validators.required],
+      mobile_number: [''],
       subscription_type: ['', Validators.required],
       contract_date: [''],
       activation_date: [''],
@@ -106,7 +106,7 @@ export class AddLocationComponent implements OnInit {
       address: [''],
       ref_number: [''],
       plan_id: ['', Validators.required],
-      status: ['', Validators.required]
+      status: [Status.ACTIVE, Validators.required ]
     });
   }
 

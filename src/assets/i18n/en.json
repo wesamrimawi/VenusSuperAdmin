@@ -96,5 +96,13 @@
   "update": "Update",
   "delete": "Delete",
   "role": "Role",
-  "branch_name":"Branch Name"
+  "branch_name":"Branch Name",
+  "anywhere": "Anywhere",
+  "work_anytime": "Work Anytime",
+  "welcome_back_please": "Welcome Back! Please",
+  "login_your_account": "Login Your Account.",
+  "login_error_message": "This Code or Username doesn't match any account. Double check and try again"
+
+
+
 }

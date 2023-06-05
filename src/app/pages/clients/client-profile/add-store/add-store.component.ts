@@ -43,7 +43,7 @@ export class AddStoreComponent implements OnInit {
     this.storeForm = this._fb.group({
       name: ['', Validators.required],
       code: ['', Validators.required],
-      mobile_number: ['', Validators.required],
+      mobile_number: [''],
       email: ['', Validators.email]
     });
   }

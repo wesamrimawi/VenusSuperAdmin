@@ -1,11 +1,11 @@
-<form [formGroup]="loginForm" (submit)="submitLogin(loginForm.value)"
+<!-- <form [formGroup]="loginForm" (submit)="submitLogin(loginForm.value)"
   class="flex flex-wrap justify-content-center card-container blue-container gap-3 m-8">
   <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div class="text-center mb-5">
       <img src="../assets/images/last-06.png" alt="Image" height="150" class="mb-3 logo">
       <div class="text-900 text-3xl font-medium mb-3">{{'app_name'|translate}}</div>
-      <!-- <span class="text-600 font-medium line-height-3">Don't have an account?</span>
-      <a class="font-medium no-underline ml-2 text-indigo-500 cursor-pointer">Create today!</a> -->
+      <span class="text-600 font-medium line-height-3">Don't have an account?</span>
+      <a class="font-medium no-underline ml-2 text-indigo-500 cursor-pointer">Create today!</a>
     </div>
     <div>
       <label for="username" class="block text-900 font-medium mb-2">{{'username'|translate}}</label>
@@ -14,16 +14,107 @@
       <label for="password" class="block text-900 font-medium mb-2">{{'password'|translate}}</label>
       <input id="password" type="password" formControlName="password" pInputText class="w-full mb-3">
 
-      <!-- <div class="flex align-items-center justify-content-between mb-6">
+      <div class="flex align-items-center justify-content-between mb-6">
         <div class="flex align-items-center">
           <p-checkbox id="rememberme" [binary]="true" styleClass="mr-2"></p-checkbox>
           <label for="rememberme1">Remember me</label>
         </div>
         <a class="font-medium no-underline ml-2 text-indigo-500 text-right cursor-pointer">Forgot password?</a>
-      </div> -->
+      </div>
 
       <button pButton pRipple type="submit" [label]="'sign_in'|translate" icon="pi pi-user"
         class="p-button-success p-button-outlined w-full" (click)="submitLogin(loginForm.value)" ></button>
     </div>
   </div>
-</form>
+</form> -->
+
+<div class="wrapper-div">
+    <img src="../../assets/images/login_photo.jpg" style="display: none;"/>
+<div class="login-page-header">
+    <img class="nard-pos-logo" src="assets/images/NardPOS.png" alt="nard-pos-logo"/>
+
+    <button class="svg-globe-icon" (click)="sidebarVisible = true">
+        <svg xmlns="http://www.w3.org/2000/svg" id="globe-svg" viewBox="0 0 120 120" style="enable-background:new 0 0 120 120" xml:space="preserve" (mouseover)="toggleColor()">
+            <switch><g>
+                <path d="M60 120C26.9 120 0 93.1 0 60S26.9 0 60 0s60 26.9 60 60-26.9 60-60 60zM60 5C29.7 5 5 29.7 5 60s24.7 55 55 55 55-24.7 55-55S90.3 5 60 5z" fill="#212656"/>
+                <path d="M60 120c-19.3 0-34.4-26.4-34.4-60S40.7 0 60 0s34.4 26.4 34.4 60-15.1 60-34.4 60zM60 5C43.8 5 30.5 29.7 30.5 60s13.2 55 29.5 55 29.5-24.7 29.5-55S76.2 5 60 5z" fill="#212656"/>
+                <path d="M12.2 25.6h95.6v5H12.2zM12.2 89.5h95.6v5H12.2zM2.5 57.5h115v5H2.5z" fill="#212656"/>
+                <path d="M57.5 2.5h5v115h-5z" fill="#212656"/>
+            </g></switch></svg>
+    </button>
+</div>
+<div class="limiter" dir="{{this.pageDir}}">
+
+    <div class="container-login100">
+
+        <div class="wrap-login100">
+            <div class="login100-form-title">
+                <span>{{'welcome_back_please'|translate}}</span><span>{{'login_your_account'|translate}}</span>
+            </div>
+            <form [formGroup]="loginForm" (submit)="submitLogin(loginForm.value)" class="login100-form validate-form">
+                <!-- <div class="wrap-input100 validate-input">
+                    <input class="input100" formControlName="code" type="number" (keyup.enter)="submitLogin()"
+                        autofocus>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">{{'code'|translate}}</span>
+                </div> -->
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" formControlName="username" (keyup.enter)="submitLogin(loginForm.value)">
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">{{'username'|translate}}</span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input id="password-input" class="input100" [type]="passwordInputType" (keyup.enter)="submitLogin(loginForm.value)" formControlName="password">
+                    <button  type="button" class="button-show-password" (click)="toggleShowPassword()" (keyup.enter)="$event.preventDefault()">
+                        <img [hidden]="!showPassword" src="assets/images/icons8-eye-24.png"/>
+                        <img [hidden]="showPassword" src="assets/images/icons8-closed-eye-32.png"/>
+                    </button>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">{{'password'|translate}}</span>
+                </div>
+                <!-- <div class="flex-sb-m w-full p-t-3 p-b-32">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            <span class="checkbox-span100">{{'remember_me'|translate}}</span>
+                        </label>
+                    </div>
+                    <div>
+                        <a href="#" class="txt1">
+                            {{'forgot_password'|translate}}
+                        </a>
+                    </div>
+                </div> -->
+                <div class="text-center">
+                    <span class="txt2 error-message" *ngIf="errorMsg === true">
+                        {{"login_error_message"|translate}}
+                    </span>
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" (click)="submitLogin(loginForm.value)" 
+                        autofocus (keyup.enter)="submitLogin(loginForm.value)" (keydown.enter)="submitLogin(loginForm.value)">{{'sign_in'|translate}}</button>
+                    </div>         
+                </form>
+                <!-- <div class="login100-more" style="background-image: url('assets/images/bgLogo.png');">
+            </div> -->
+            <div class="work-text">
+                <span class="span1">{{'work_anytime'|translate}}</span>
+                <span class="span2">{{'anywhere'|translate}}...</span>
+            </div>
+        </div>
+    </div>
+</div>
+<p-sidebar [(visible)]="sidebarVisible" position="right">
+ <div class="p-formgroup-inline">
+            <button pButton pRipple type="button" label="English" class="p-button-secondary p-button-text p-button-md fs-20 m-t-10"
+                (click)="changeLanguage('en')">
+            </button>
+        </div>
+
+        <div class="p-formgroup-inline">
+            <button pButton pRipple type="button" label="العربية" class="p-button-secondary p-button-text p-button-md fs-20 m-t-10"
+                (click)="changeLanguage('ar')">
+            </button>
+        </div>
+</p-sidebar>
+</div>

@@ -1,38 +1,44 @@
 <form [formGroup]="deviceForm" (submit)="submitAdd(deviceForm.value)" [dir]="'dir'|translate">
   <div class="grid p-fluid">
-    <div class="field col-12 md:col-4 mb-5">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-6">
       <label for="Name">{{"name"|translate}} </label>
+      <small class="ng-dirty ng-invalid p-error"
+        *ngIf="vf['name'].errors && vf['name'].errors['required']"><span>&nbsp;*</span>
+      </small>
       <input pInputText type="text" formControlName="name">
-      <span class="error" *ngIf="vf['name'].errors && vf['name'].errors['required']">Name Is Required</span>
     </div>
 
-    <div class="field col-12 md:col-4 ">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-6">
       <label for="Serial Number">{{"serial_number"|translate}}</label>
       <p-inputNumber formControlName="serial_number"></p-inputNumber>
-      <span class="error" *ngIf="vf['serial_number'].errors && vf['serial_number'].errors['required']">Serial Number Is
-        Required</span>
     </div>
 
-    <div class="field col-12 md:col-4 mb-5">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-6">
       <label for="product">{{"products"|translate}}</label>
+      <small class="ng-dirty ng-invalid p-error"
+      *ngIf="vf['product_id'].errors && vf['product_id'].errors['required']"><span>&nbsp;*</span>
+    </small>
 
-      <p-dropdown appendTo="body" [options]="productList$|async" placeholder="{{'select_item' | translate}}"
-        optionLabel="product_name" formControlName="product_id"></p-dropdown>
+      <p-dropdown appendTo="body" [options]="productList$|async" [placeholder]="'select' | translate"
+        optionLabel="product_name" formControlName="product_id">
+      </p-dropdown>
 
-      <span class="error" *ngIf="vf['product_id'].errors && vf['product_id'].errors['required']">Product Is
-        Required</span>
     </div>
 
-    <div class="col-12 md:sm-12 md:col-8">
-      <p-multiSelect  appendTo="body" [filterBy]="'branch_name ``1'" [options]="branchList$|async" formControlName="branches" defaultLabel="Select a Branch"
-      display="chip"  optionLabel="branch_name"></p-multiSelect>
+    <div class="col-12 md:sm-12 md:col-6">
+      <label>{{"branches"|translate}}</label>
+      <p-multiSelect  appendTo="body" [filterBy]="'branch_name'" [options]="branchList$|async" 
+      formControlName="branches" defaultLabel="Select a Branch"
+      display="chip" optionValue="id"  optionLabel="branch_name">
+    </p-multiSelect>
     </div>
 
   </div>
   <div class="absolute  bottom-0  right-0">
     <div class="field col-12 md:col-12">
-
-        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"   [disabled]="deviceForm.invalid && !editMode "></button>
+        <button pButton pRipple  type="submit" [label]="'save'|translate" icon="pi pi-check"  
+         [disabled]="deviceForm.invalid && !editMode ">
+        </button>
 
     </div>
   </div>

@@ -53,8 +53,8 @@ export class UserGroupsComponent implements OnInit {
     this.closeDialogSubs = this._dialogService.open(UserGroupFormComponent, {
       header: this._translate.instant('add_user_group'),
       width: '90%',
-      height: '75%',
-      contentStyle: { "overflow-y": "scroll" },
+      height: '90%',
+      contentStyle: { "overflow-y": "hidden" },
       baseZIndex: 10000,
     }).onClose.subscribe(added => {
       if (added) {

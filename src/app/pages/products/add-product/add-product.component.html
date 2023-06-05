@@ -1,29 +1,31 @@
 <form [formGroup]="productForm" (submit)="submitAdd(productForm.value)" [dir]="'dir'|translate">
   <div class="grid p-fluid">
-    <div class="field col-12 md:col-4 mb-5">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-4">
       <label for="product_name">{{'name' | translate}}</label>
+      <small class="ng-dirty ng-invalid p-error"
+         *ngIf="vf['product_name'].errors && vf['product_name'].errors['required']"><span>&nbsp;*</span>
+      </small>
       <input pInputText formControlName="product_name" id="product_name" type="text" autofocus />
-      <span class="error"
-        *ngIf="vf['product_name'].errors && vf['product_name'].errors['required']">{{'name_is_required' | translate}}</span>
+
     </div>
 
-    <div class="field col-12 md:col-4 mb-5">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-4">
       <label for="model">{{'model' | translate}}</label>
       <input pInputText formControlName="model" id="model" type="text" />
     </div>
 
-    <div class="field col-12 md:col-4">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-4">
       <label for="price">{{'price' | translate}}</label>
       <p-inputNumber formControlName="price" id="price"></p-inputNumber>
     </div>
 
-    <div class="field col-12 md:col-4">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-4">
       <label for="guarantee">{{'guarantee' | translate}}</label>
       <p-inputNumber formControlName="guarantee" id="guarantee"></p-inputNumber>
     </div>
 
 
-    <div class="field col-12 md:col-4">
+    <div class="col-12 sm:col-6 md:col-6 lg:col-4">
       <label for="note">{{'note' | translate}}</label>
       <input pInputText id="note" formControlName="note" type="text" />
     </div>
@@ -31,7 +33,7 @@
   <div class="absolute  bottom-0  right-0">
     <div class="field col-12 md:col-12">
     
-        <button pButton pRipple  type="submit" label="{{'save'|translate}}" icon="pi pi-check"  [disabled]="productForm.invalid && !editMode"></button>
+        <button pButton pRipple  type="submit" [label]="'save'|translate" icon="pi pi-check"  [disabled]="productForm.invalid && !editMode"></button>
 
     </div>
   </div>
