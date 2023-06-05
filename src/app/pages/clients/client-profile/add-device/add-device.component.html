@@ -26,10 +26,10 @@
     </div>
 
     <div class="col-12 md:sm-12 md:col-6">
-      <label for="">{{"branches"|translate}}</label>
-      <p-multiSelect  appendTo="body" [filterBy]="'branch_name ``1'" [options]="branchList$|async" 
+      <label>{{"branches"|translate}}</label>
+      <p-multiSelect  appendTo="body" [filterBy]="'branch_name'" [options]="branchList$|async" 
       formControlName="branches" defaultLabel="Select a Branch"
-      display="chip"  optionLabel="branch_name">
+      display="chip" optionValue="id"  optionLabel="branch_name">
     </p-multiSelect>
     </div>
 

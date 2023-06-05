@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import {  Observable, of } from 'rxjs';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { map } from 'rxjs/operators';
+import { map,tap } from 'rxjs/operators';
 @Component({
   templateUrl: './add-device.component.html',
   styleUrls: ['../../../pages.component.scss']
@@ -43,13 +43,25 @@ export class AddDeviceComponent implements OnInit {
     this.deviceForm.controls['name'].setValue(details.device_name);
     this.deviceForm.controls['product_id'].setValue(details.product);
     this.deviceForm.controls['serial_number'].setValue(details.serialNumber);
-    this.deviceForm.controls['branches'].setValue(details.branches?.map((branches: Branch) => branches.id))
+    // this.deviceForm.controls['branches'].setValue(details.branches?.map((branches: Branch) => branches.id))
   }
 
+  fillBranchList(): void {
+    const details: any = this._config.data.details;
+    console.log(details.branches)
+    this.deviceForm.controls['branches'].setValue(details.branches?.map((branches: Branch) => {
+      console.log(branches.branch_name)
+      return branches.id
+    }))
+    console.log(this.deviceForm.controls['branches'].value)
+  }
 
   private loadAllBranch = (): void => {
     this._apiService.apiName = `clients/${this.clientId}/branches`;
-    this.branchList$ = this._apiService.getAll().pipe(map(resp => resp.error_code === 0 && resp.data));
+    this.branchList$ = this._apiService.getAll().pipe(
+    map(resp => resp.error_code === 0 && resp.data),
+    tap(() => this.editMode && this.fillBranchList())
+    );
   }
 
   initDeviceForm = (): void => {
@@ -57,7 +69,7 @@ export class AddDeviceComponent implements OnInit {
       name: ['', Validators.required],
       serial_number: [''],
       product_id: ['', Validators.required],
-      branches: [[], Validators.required]
+      branches: ['', Validators.required]
     });
   }
 
@@ -70,19 +82,20 @@ export class AddDeviceComponent implements OnInit {
     if (this.deviceForm.invalid) {
       return;
     }
-    const selected_branches = formValues.branches;
+    const selected_branches = formValues.branches.map(Number);
 
     const data: AddDeviceDto = {
       device_name: formValues.name,
       serial_number: formValues.serial_number,
       product_id: formValues.product_id.id,
-      branch_ids: selected_branches.map(br => +br.id),
+      branch_ids: selected_branches,
       store_id: +selected_branches[0]?.store?.id
     }
 
     if (this.editMode) {
       this._apiService.apiName = `clients/${this.clientId}/devices`;
       const id: number = this._config.data.details.id;
+      console.log(id)
       this._apiService.update(data, id).subscribe(() => this._ref.close(true));
     } else {
       this._apiService.apiName = `clients/${this.clientId}/devices`;
