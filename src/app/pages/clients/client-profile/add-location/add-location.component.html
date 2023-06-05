@@ -156,7 +156,7 @@
     <div class="field col-12 md:col-12">
 
       <button pButton pRipple type="submit" label="{{'save'|translate}}" icon="pi pi-check"
-        [disabled]="locationForm.invalid  "></button>
+        [disabled]="locationForm.invalid && !editMode "></button>
 
     </div>
 
