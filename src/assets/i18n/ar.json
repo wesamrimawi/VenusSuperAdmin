@@ -97,5 +97,13 @@
   "update": "تعديل",
   "delete": "حذف",
   "role": "دور",
-  "branch_name":"إسم الفرع"
+  "branch_name":"إسم الفرع",
+  "work_anytime": "العمل في أي وقت",
+  "anywhere": "وفي أي مكان",
+  "login_your_account": "تسجيل الدخول إلى حسابك.",
+  "welcome_back_please": "مرحباً بعودتك! من فضلك",
+  "login_error_message": "اسم أو رمز المستخدم لا يطابق أي حساب. تأكد وحاول مرة أخرى."
+
+
+
 }

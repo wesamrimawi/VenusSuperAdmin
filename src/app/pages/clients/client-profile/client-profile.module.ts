@@ -11,6 +11,7 @@ import { SmartTableModule } from 'src/app/core/smart-table/smart-table.module';
 import { AddDeviceComponent } from './add-device/add-device.component';
 import { AddLocationComponent } from './add-location/add-location.component';
 import { AddStoreComponent } from './add-store/add-store.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AddStoreComponent } from './add-store/add-store.component';
     SharedModule,
     TabViewModule,
     TableModule,
-    SmartTableModule
+    SmartTableModule,
+    ConfirmDialogModule
   ]
 })
 export class ClientProfileModule { }

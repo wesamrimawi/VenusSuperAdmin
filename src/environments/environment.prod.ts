@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://35.91.240.42/superadmin/api/'
+  // apiUrl: 'https://flexapos.com/superadmin/api/'
+  apiUrl: 'http://52.34.89.2/superadmin/api/'
 };

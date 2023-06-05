@@ -99,7 +99,7 @@ body {
   left: 0px;
   width: 15px;
   height: 15px;
-  background: #0772B3;
+  background:#212656;
   border-radius: 50%;
 }
 .loader li.dot-a {
@@ -258,7 +258,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #0f97c7;
+  color: #212656;
 }
 
 @-webkit-keyframes fadeInDown {
@@ -393,19 +393,23 @@ a {
   color: #ffffff;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar {
-  background-color: #0772B3;
+  /* background-color:#212656; */
+  background-color: #212656;
+
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-icon {
   color: #ffffff;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-icon:hover {
-  background-color: #054e7a;
+  background-color: #212656;
+
+
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-search {
-  background-color: #0772B3;
+  background-color: #212656;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-search input {
-  background-color: #0772B3;
+  background-color: #212656;
   color: #ffffff;
 }
 .layout-wrapper.layout-topbar-blue .layout-topbar .layout-topbar-search input::-webkit-input-placeholder {
@@ -989,7 +993,9 @@ a {
   margin-left: 1.5em;
 }
 .layout-wrapper .layout-topbar .layout-topbar-logo img {
-  height: 24px;
+  /* height: 24px; */
+  height: 50px;
+  width: auto;
 }
 .layout-wrapper .layout-topbar .layout-topbar-search {
   position: relative;
@@ -1330,7 +1336,7 @@ a {
   border-right: 4px solid transparent;
 }
 .layout-wrapper .layout-menu-container .layout-menu > li.active-menuitem {
-  border-left-color: #0f97c7;
+  border-left-color: #212656;
 }
 .layout-wrapper .layout-menu-container .layout-menu li.layout-root-menuitem > .layout-menuitem-root-text {
   font-size: 1rem;
@@ -1474,24 +1480,24 @@ a {
   color: #252529;
 }
 .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li a.active-menuitem-routerlink {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li a.active-menuitem-routerlink .layout-menuitem-icon,
 .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li a.active-menuitem-routerlink .layout-submenu-toggler {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li.active-menuitem > a .layout-menuitem-text {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li.active-menuitem > a .layout-menuitem-icon, .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li.active-menuitem > a .layout-submenu-toggler {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li > a.active-menuitem-routerlink .layout-menuitem-text {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li > a.active-menuitem-routerlink .layout-menuitem-icon,
 .layout-wrapper.layout-menu-light .layout-menu-container .layout-menu li > a.active-menuitem-routerlink .layout-submenu-toggler {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-dark .layout-menu-container {
   background-color: #252529;
@@ -1551,24 +1557,24 @@ a {
   color: #ebebef;
 }
 .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li a.active-menuitem-routerlink {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li a.active-menuitem-routerlink .layout-menuitem-icon,
 .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li a.active-menuitem-routerlink .layout-submenu-toggler {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li.active-menuitem > a .layout-menuitem-text {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li.active-menuitem > a .layout-menuitem-icon, .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li.active-menuitem > a .layout-submenu-toggler {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li > a.active-menuitem-routerlink .layout-menuitem-text {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li > a.active-menuitem-routerlink .layout-menuitem-icon,
 .layout-wrapper.layout-menu-dark .layout-menu-container .layout-menu li > a.active-menuitem-routerlink .layout-submenu-toggler {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-wrapper .layout-main {
   padding-top: 70px;
@@ -1832,7 +1838,7 @@ a {
   }
   .layout-wrapper.layout-horizontal .layout-menu-container .layout-menu > li.active-menuitem > ul {
     display: block;
-    border-top: 4px solid #0f97c7;
+    border-top: 4px solid #212656;
   }
   .layout-wrapper.layout-horizontal .layout-topbar .layout-menu-button, .layout-wrapper.layout-slim .layout-topbar .layout-menu-button {
     display: none;
@@ -1878,7 +1884,10 @@ a {
     margin-left: 1em;
   }
   .layout-wrapper .layout-topbar .layout-topbar-logo img {
-    height: 16px;
+    /* height: 16px; */
+
+    height: 50px;
+    width: auto;
   }
   .layout-wrapper .layout-menu-container {
     top: 110px;
@@ -1989,7 +1998,7 @@ a {
   font-weight: 500;
   color: #252529;
   background-color: #ffffff;
-  border-bottom: 2px solid #0f97c7;
+  border-bottom: 2px solid #212656;
 }
 .layout-right-panel .status-title {
   margin: 24px 0 12px 0;
@@ -2207,9 +2216,9 @@ a {
   font-size: 30px;
   margin: 0 auto;
   text-align: center;
-  border: 30px solid #0f97c7;
+  border: 30px solid #212656;
   border-left-color: #1cb9d7;
-  border-tocolor: #0772b3;
+  border-top-color:#212656;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -2240,13 +2249,13 @@ a {
   font-size: 12px;
 }
 .layout-dashboard .expenses .expenses-legend > div:nth-child(1) i {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-dashboard .expenses .expenses-legend > div:nth-child(2) i {
   color: #1cb9d7;
 }
 .layout-dashboard .expenses .expenses-legend > div:nth-child(3) i {
-  color: #0772b3;
+  color:#212656;
 }
 .layout-dashboard .expenses .expenses-footer {
   text-align: right;
@@ -2290,7 +2299,7 @@ a {
   vertical-align: middle;
 }
 .layout-dashboard .timeline ul li:nth-child(1) i {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-dashboard .timeline ul li:nth-child(2) i {
   color: #1cb9d7;
@@ -2316,7 +2325,7 @@ a {
   margin: 1em 0;
 }
 .layout-dashboard .tasks p .task-highlight {
-  color: #0f97c7;
+  color: #212656;
 }
 .layout-dashboard .tasks ul {
   padding: 0;
@@ -2339,7 +2348,7 @@ a {
   vertical-align: middle;
 }
 .layout-dashboard .tasks ul .task-badge-open {
-  color: #0f97c7;
+  color: #212656;
   float: right;
   margin-top: 0.25em;
   font-weight: 500;
@@ -2699,7 +2708,7 @@ a {
   vertical-align: middle;
 }
 .timeline ul li:nth-child(1) i {
-  color: #0f97c7;
+  color: #212656;
 }
 .timeline ul li:nth-child(2) i {
   color: #1cb9d7;
@@ -3055,7 +3064,7 @@ a {
   background-position: bottom;
 }
 .exception-body.notfound .exception-panel {
-  border-left: #0f97c7 solid 23px;
+  border-left: #212656 solid 23px;
 }
 .exception-body.accessdenied {
   background: url("../../layout/images/pages/accessdenied-bg.jpg");
@@ -3262,7 +3271,7 @@ a {
 }
 .landing-body .landing-wrapper .landing-news button {
   background-color: #ffffff;
-  color: #0f97c7;
+  color: #212656;
   padding: 8px 24px;
 }
 .landing-body .landing-wrapper .landing-pricing {
@@ -3614,7 +3623,7 @@ a {
 }
 .layout-rtl.layout-wrapper .layout-menu-container .layout-menu > li.active-menuitem {
   border-left-color: transparent;
-  border-right-color: #0f97c7;
+  border-right-color: #212656;
 }
 .layout-rtl.layout-wrapper .layout-menu-container .layout-menu li a .layout-menuitem-icon {
   margin-right: 0;
@@ -3875,12 +3884,12 @@ a {
   transform: rotate(360deg);
 }
 .layout-config .layout-config-button {
-  display: block;
+  display: none;
   position: absolute;
   width: 52px;
   height: 52px;
   line-height: 52px;
-  background-color: #0f97c7;
+  background-color: #212656;
   text-align: center;
   color: #ffffff;
   top: 230px;
@@ -3900,7 +3909,7 @@ a {
 .layout-config .layout-config-header {
   padding: 18px 12px;
   margin-bottom: 12px;
-  background-image: linear-gradient(90deg, #0f97c7 10%, #12b4ed 100%);
+  background-image: linear-gradient(90deg, #212656 10%, #12b4ed 100%);
 }
 .layout-config .layout-config-header > h3 {
   font-size: 16px;

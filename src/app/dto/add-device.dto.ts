@@ -3,4 +3,5 @@ export interface AddDeviceDto {
   product_id: number;
   serial_number: string;
   branch_ids?:[];
+  store_id: number;
 }

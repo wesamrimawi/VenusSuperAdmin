@@ -53,8 +53,8 @@ export class UserGroupsComponent implements OnInit {
     this._apiService.apiName = 'userroles';
     this.closeDialogSubs = this._dialogService.open(AddUserGroupComponent, {
       header: this._translate.instant('add_user_groups'),
-      width: '60%',
-      height: '70%',
+      width: '90%',
+      height: '75%',
       contentStyle: { "overflow": "auto" },
       baseZIndex: 10000
     }).onClose.subscribe(added => {
@@ -72,7 +72,8 @@ export class UserGroupsComponent implements OnInit {
     if (response?.error_code === 0) {
       this._dialogService.open(AddUserGroupComponent, {
         header: this._translate.instant('edit_user_group'),
-        width: '50%',
+        width: '90%',
+        height: '75%',
         contentStyle: { "overflow": "hidden" },
         baseZIndex: 10000,
         data: { editMode: true, details: response?.data },

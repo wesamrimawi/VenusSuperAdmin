@@ -1,16 +1,16 @@
 <div [dir]="'dir'|translate">
   <p-table #dt1 [columns]="tableColumns" [value]="tableData"
     styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" [responsive]="true" responsiveLayout="scroll"
-    [dir]="'dir'|translate" styleClass="ui-rtl" tableStyleClass="ui-rtl" [paginator]="checkDataIsEmpty()" [rows]="rows"
+    [dir]="'dir'|translate" styleClass="p-datatable-sm p-datatable-striped" tableStyleClass="ui-rtl" [paginator]="checkDataIsEmpty()" [rows]="rows"
     [rowsPerPageOptions]="[10,25,50]" sortMode="multiple" [globalFilterFields]="filterKeys" [lazy]="lazyMode"
     [totalRecords]="numberOfTotalRecords" [loading]="showLoader" [rowHover]="true" [scrollable]="true"
     scrollHeight="flex">
     <ng-template pTemplate="caption">
       <div class="grid p-fluid">
-        <div class="field col-12 md:col-6">{{tableTitle}}</div>
-        <div class="field col-12 md:col-6">
+        <div class=" col-12 md:col-9  pl-4 mt-2 tabel-titel">{{tableTitle}}</div>
+        <div class=" col-12 md:col-3 pl-4 mt-2">
           <div class="p-inputgroup end">
-            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+            <!-- <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span> -->
             <input type="text" #filiter pInputText (input)="dt1.filterGlobal(filiter.value, 'contains')"
               placeholder="Search">
           </div>
@@ -50,11 +50,11 @@
             <!-- <button pButton pRipple type="button"  *ngIf="editButton" (click)="editButtonClicked(rowData)" icon="pi pi-pencil"
               class="p-button-success"></button> -->
 
-              <button pButton pRipple *ngIf="editButton" icon="pi pi-pencil" class="p-button-rounded " (click)="editButtonClicked(rowData)"></button>
+              <button pButton pRipple *ngIf="editButton" icon="pi pi-pencil" class="p-button-rounded mr-1" (click)="editButtonClicked(rowData)"></button>
 
             <!-- <button pButton pRipple type="button" *ngIf="deleteButton" (click)="deleteButtonClicked(rowData)"
               icon="pi pi-times" class="p-button-danger"></button> -->
-              <button pButton pRipple icon="pi pi-trash" *ngIf="deleteButton "class="p-button-rounded p-button-danger" (click)="deleteButtonClicked(rowData)"></button>
+              <button pButton pRipple icon="pi pi-trash" *ngIf="deleteButton "class="p-button-rounded p-button-danger mr-1" (click)="deleteButtonClicked(rowData)"></button>
 
             </dev>
         </td>

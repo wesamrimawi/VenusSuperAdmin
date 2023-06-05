@@ -8,6 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Languages } from 'src/app/enum/languages.enum';
 @Component({
   templateUrl: './system-modules.component.html',
   styleUrls: ['./system-modules.component.scss'],
@@ -30,26 +31,6 @@ export class SystemModulesComponent implements OnInit {
     this.loadAllModules();
   }
 
-  showEditDialog = async (e: any) => {
-    this._apiService.apiName = 'modules';
-    const response = await this._apiService.getById(e.id).toPromise();
-    if (response?.error_code === 0) {
-      this._dialogService.open(AddSystemModuleComponent, {
-        header: this._translate.instant('edit_module'),
-        width: '50%',
-        contentStyle: { "overflow": "hidden" },
-        baseZIndex: 10000,
-        data: { editMode: true, details: response?.data },
-        closable: true
-      }).onClose.subscribe(edited => {
-        if (edited) {
-          this.loadAllModules();
-          this._messageService.add({ severity: 'success', summary: 'System Module successfully Updated' });
-          this._cdr.detectChanges();
-        }
-      });
-    }
-  }
 
   private initTableCols = (): void => {
     this.tableCols = [
@@ -67,10 +48,11 @@ export class SystemModulesComponent implements OnInit {
   showAddDialog = (): void => {
     this.closeDialogSubs = this._dialogService.open(AddSystemModuleComponent, {
       header: this._translate.instant('add_system_module'),
-      width: '50%',
-      height: '30%',
-      contentStyle: {  },
-      baseZIndex: 10000
+      width: '90%',
+        height: '60%',
+        contentStyle: { "overflow-y": "scroll" },
+        rtl: this._translate.currentLang === Languages.AR,
+        baseZIndex: 10000,
     }).onClose.subscribe(added => {
       if (added) {
         this.loadAllModules();
@@ -78,6 +60,31 @@ export class SystemModulesComponent implements OnInit {
         this._cdr.detectChanges();
       }
     });
+  }
+
+
+  
+  showEditDialog = async (e: any) => {
+    this._apiService.apiName = 'modules';
+    const response = await this._apiService.getById(e.id).toPromise();
+    if (response?.error_code === 0) {
+      this._dialogService.open(AddSystemModuleComponent, {
+        header: this._translate.instant('edit_module'),
+        width: '90%',
+        height: '60%',
+        contentStyle: { "overflow-y": "scroll" },
+        rtl: this._translate.currentLang === Languages.AR,
+        baseZIndex: 10000,
+        data: { editMode: true, details: response?.data },
+        closable: true
+      }).onClose.subscribe(edited => {
+        if (edited) {
+          this.loadAllModules();
+          this._messageService.add({ severity: 'success', summary: 'System Module successfully Updated' });
+          this._cdr.detectChanges();
+        }
+      });
+    }
   }
 
   deleteModule = (data: SystemModule): void => {

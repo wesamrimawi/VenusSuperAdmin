@@ -30,25 +30,7 @@ export class PlansComponent implements OnInit {
     this.loadAllPlans();
   }
 
-  showEditDialog = async (e: any) => {
-    const response = await this._apiService.getById(e.id).toPromise();
-    if (response?.error_code === 0) {
-      this._dialogService.open(AddPlanComponent, {
-        header: this._translate.instant('edit_plan'),
-        width: '50%',
-        contentStyle: { "overflow": "hidden" },
-        baseZIndex: 10000,
-        data: { editMode: true, details: response?.data },
-        closable: true
-      }).onClose.subscribe(edited => {
-        if (edited) {
-          this.loadAllPlans();
-          this._messageService.add({ severity: 'success', summary: 'plan successfully Updated' });
-          this._cdr.detectChanges();
-        }
-      });
-    }
-  }
+
 
   private initColsPlans = (): void => {
     this.tableCols = [
@@ -68,10 +50,11 @@ export class PlansComponent implements OnInit {
   showAddDialog = (): void => {
     this.closeDialogSubs = this._dialogService.open(AddPlanComponent, {
       header: this._translate.instant('add_plans'),
-      width: '65%',
-      height: '85%',
+      width: '90%',
+      height: '75%',
       contentStyle: { "overflow": "hidden" },
-      baseZIndex: 10000
+      baseZIndex: 10000,
+      closable:true
     }).onClose.subscribe(added => {
       if (added) {
         this.loadAllPlans();
@@ -80,6 +63,28 @@ export class PlansComponent implements OnInit {
       }
     });
   }
+
+  showEditDialog = async (e: any) => {
+    const response = await this._apiService.getById(e.id).toPromise();
+    if (response?.error_code === 0) {
+      this._dialogService.open(AddPlanComponent, {
+        header: this._translate.instant('edit_plan'),
+        width: '90%',
+        height: '75%',
+        contentStyle: { "overflow": "hidden" },
+        baseZIndex: 10000,
+        data: { editMode: true, details: response?.data },
+        closable: true
+      }).onClose.subscribe(edited => {
+        if (edited) {
+          this.loadAllPlans();
+          this._messageService.add({ severity: 'success', summary: 'plan successfully Updated' });
+          this._cdr.detectChanges();
+        }
+      });
+    }
+  }
+
 
   deletePlan = (data: Plan): void => {
     this._apiService.delete(data.id).subscribe((response) => {
