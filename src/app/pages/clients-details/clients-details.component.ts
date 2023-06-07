@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 @Component({
   selector: "app-clients-details",
   templateUrl: "./clients-details.component.html",
@@ -9,11 +10,14 @@ export class ClientsDetailsComponent implements OnInit {
   tableCols: any = [];
   filters: string[] = [];
   tableTitle: string = this._translate.instant("Clients Details");
+  dateTimeOptions: any;
+  filterForm: FormGroup = new FormGroup({});
 
-  constructor(private _translate: TranslateService) {}
+  constructor(private _translate: TranslateService, private _fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.initTableColsHeader()
+    this.initTableColsHeader();
+    this.loadDateTimeOptions();
   }
 
   private initTableColsHeader = (): void => {
@@ -33,4 +37,36 @@ export class ClientsDetailsComponent implements OnInit {
     ];
     this.filters = this.tableCols.map((el: any) => el.field);
   };
+
+  private initFilterForm() {
+    this.filterForm = this._fb.group({
+      dateTimeOptions: [""],
+      fromDate: [""],
+      toDate: [""],
+      businessType: [],
+      Tag: [],
+      subTag: [],
+      plan: [],
+      country: [],
+      subscriptionType: [],
+      expiryDate: [""],
+      creationDate: [""],
+      activationDay: [""],
+      code: [""],
+    });
+  }
+
+  private loadDateTimeOptions() {
+    this.dateTimeOptions = [
+      { label: "Today" },
+      { label: "This Week" },
+      { label: "This Month" },
+      { label: "This Year" },
+      { label: "Yesterday" },
+      { label: "Last Week" },
+      { label: "Last Month" },
+      { label: "Last Year" },
+      { label: "Customzie" },
+    ];
+  }
 }

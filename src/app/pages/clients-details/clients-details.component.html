@@ -1,7 +1,209 @@
+<p-overlayPanel
+  #reportsFilter
+  [showCloseIcon]="true"
+  [style]="{ width: '75%' }">
+  <ng-template pTemplate>
+    <form [formGroup]="filterForm">
+      <div class="container-fluid mt-2">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Date Time Option</label>
+            <p-dropdown
+              [options]="dateTimeOptions"
+              appendTo="body"
+              optionLabel="label"
+              optionValue="value"
+              formControlName="datetTimeOptions"></p-dropdown>
+          </div>
+
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">From Date</label>
+            <p-calendar
+              appendTo="body"
+              dateFormat="yy-mm-dd"
+              formControlName="fromDate"
+              [showSeconds]="true"
+              appendTo="body"
+              class="mr-1"
+              dateFormat="yy-mm-dd"
+              styleClass="{'width':'100%'}"
+              placeholder="From Date">
+            </p-calendar>
+          </div>
+
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">To Date</label>
+            <p-calendar
+              appendTo="body"
+              dateFormat="yy-mm-dd"
+              formControlName="toDate"
+              [showSeconds]="true"
+              appendTo="body"
+              class="mr-1"
+              dateFormat="yy-mm-dd"
+              styleClass="{'width':'100%'}"
+              placeholder="To Date">
+            </p-calendar>
+          </div>
+
+          <div class="field col-12 md:col-4">
+            <label class="model-label model-label-form">Business Type</label>
+            <p-multiSelect
+              [options]=""
+              optionLabel="label"
+              [defaultLabel]="'Business type'"
+              optionLabel="Business Type"
+              optionValue="value"
+              formControlName="businessType">
+            </p-multiSelect>
+          </div>
+
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Tag</label>
+            <p-multiSelect
+              appendTo="body"
+              formControlName="tag"
+              [defaultLabel]="'Tag'"
+              optionLabel="Tag"
+              display="chip"
+              [options]=""
+              optionValue="id">
+            </p-multiSelect>
+          </div>
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Sub Tag</label>
+            <p-dropdown
+              appendTo="body"
+              formControlName="subTag"
+             [placeholder]="'Sub Tag'"
+              [options]=""
+              optionValue="id">
+            </p-dropdown>
+          </div>
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Plan</label>
+            <p-multiSelect
+              appendTo="body"
+              formControlName="plan"
+              [defaultLabel]="'Plans'"
+              display="chip"
+              optionLabel="plan"
+              [options]=""
+              optionValue="id">
+            </p-multiSelect>
+          </div>
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Country</label>
+            <p-multiSelect
+              formControlName="country"
+              [options]=""
+              [placeholder]="'Country'"
+              optionLabel="country">
+            </p-multiSelect>
+          </div>
+
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form"
+              >Subscription Type</label
+            >
+            <p-dropdown
+              formControlName="subscriptionType"
+              [options]=""
+              [placeholder]="'Subscription Type'"
+              optionLabel="">
+            </p-dropdown>
+          </div>
+
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Creation Date</label>
+            <p-calendar
+            appendTo="body"
+            formControlName="creationDate"
+            formControlName="toDate"
+            [showSeconds]="true"
+            class="mr-1"
+            dateFormat="yy-mm-dd"
+            styleClass="{'width':'100%'}"
+            placeholder="Creation Date">
+          </p-calendar>
+        </div>
+        <div class="col-12 md:col-4">
+          <label class="model-label model-label-form">Activation Date</label>
+          <p-calendar
+          appendTo="body"
+          formControlName="activationDate"
+          dateFormat="yy-mm-dd"
+          [showSeconds]="true"
+          class="mr-1"
+          dateFormat="yy-mm-dd"
+          styleClass="{'width':'100%'}"
+          placeholder="Activation Date">
+        </p-calendar>
+      </div>
+      <div class="col-12 md:col-4">
+        <label class="model-label model-label-form">Expiry Date</label>
+        <p-calendar
+          appendTo="body"
+          formControlName="expiryDate"
+          dateFormat="yy-mm-dd"
+          [showSeconds]="true"
+          class="mr-1"
+          dateFormat="yy-mm-dd"
+          styleClass="{'width':'100%'}"
+          placeholder="Expiry Date">
+        </p-calendar>
+      </div>
+      <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Code</label>
+            <input
+              pInputText
+              type="text"
+              formControlName="code"
+              placeholder="Code" />
+          </div>
+        </div>
+      </div>
+      <div class="grid p-fluid mb-2 mt-2">
+        <div class="col-12 md:col-12 flex justify-content-center">
+          <div class="absolute bottom-0 p-2">
+            <span class="p-buttonset">
+              <p-button
+                icon="pi pi-times"
+                (onClick)="reportsFilter.hide()"
+                styleClass="p-button-danger"
+                [label]="'Reset'">
+              </p-button>
+              <p-button
+                [label]="'Filter'"
+                (onClick)="reportsFilter.hide()"
+                type="button"
+                icon="pi pi-filter"
+                styleClass="p-button-primary">
+              </p-button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+</p-overlayPanel>
+
 <div class="grid">
   <div class="col-12">
-      <div class="card">
-          <smart-table [columns]="tableCols" [title]="tableTitle"></smart-table>
+    <p-toolbar styleClass="mb-1 p-2">
+      <div class="p-toolbar-group-left">
+        <button
+          pButton
+          pRipple
+          type="button"
+          [label]="'Filter'"
+          icon="pi pi-search"
+          class=""
+          (click)="reportsFilter.toggle($event)"></button>
       </div>
+    </p-toolbar>
+    <div class="card">
+      <smart-table [columns]="tableCols" [title]="tableTitle"></smart-table>
+    </div>
   </div>
 </div>
