@@ -94,6 +94,7 @@ export class ClientsDetailsComponent implements OnInit {
 
   getClientsDetails() {
     this._apiService.apiName = "clients/details";
+    this._apiService.options ={limit:100, offset: this.offset}
     const tableBody = {
       clients: null,
       businessType: null,
