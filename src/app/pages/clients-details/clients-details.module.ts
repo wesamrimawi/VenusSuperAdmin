@@ -11,6 +11,7 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { CalendarModule } from "primeng/calendar";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { InputTextModule } from "primeng/inputtext";
+import { TableModule } from "primeng/table";
 
 @NgModule({
   declarations: [ClientsDetailsComponent],
@@ -25,7 +26,8 @@ import { InputTextModule } from "primeng/inputtext";
     MultiSelectModule,
     CalendarModule,
     SelectButtonModule,
-    InputTextModule
+    InputTextModule,
+    TableModule
   ],
 })
 export class ClientsDetailsModule {}

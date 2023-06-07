@@ -45,15 +45,26 @@
               placeholder="To Date">
             </p-calendar>
           </div>
+           <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Clients</label>
+            <p-multiSelect
+              appendTo="body"
+              formControlName="plan"
+              [defaultLabel]="'Clients'"
+              display="chip"
+              optionLabel="client_name"
+              [options]="clientsList$|async"
+              optionValue="id">
+            </p-multiSelect>
+          </div>
 
           <div class="field col-12 md:col-4">
             <label class="model-label model-label-form">Business Type</label>
             <p-multiSelect
-              [options]=""
-              optionLabel="label"
+              [options]="allBusinessTypes$|async"
               [defaultLabel]="'Business type'"
-              optionLabel="Business Type"
-              optionValue="value"
+              optionLabel="name"
+              optionValue="id"
               formControlName="businessType">
             </p-multiSelect>
           </div>
@@ -64,21 +75,21 @@
               appendTo="body"
               formControlName="tag"
               [defaultLabel]="'Tag'"
-              optionLabel="Tag"
+              optionLabel="name"
               display="chip"
-              [options]=""
+              [options]="allMainTags$|async"
               optionValue="id">
             </p-multiSelect>
           </div>
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Sub Tag</label>
-            <p-dropdown
+            <p-multiSelect
               appendTo="body"
               formControlName="subTag"
-             [placeholder]="'Sub Tag'"
-              [options]=""
-              optionValue="id">
-            </p-dropdown>
+             [defaultLabel]="'Sub Tag'"
+              [options]="subTags$|async"
+              optionValue="name">
+            </p-multiSelect>
           </div>
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Plan</label>
@@ -87,18 +98,18 @@
               formControlName="plan"
               [defaultLabel]="'Plans'"
               display="chip"
-              optionLabel="plan"
-              [options]=""
-              optionValue="id">
+              optionLabel="plan_name"
+              [options]="allPlans$|async"
+              optionValue="plan_id">
             </p-multiSelect>
           </div>
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Country</label>
             <p-multiSelect
               formControlName="country"
-              [options]=""
+              [options]="allCounties$|async"
               [placeholder]="'Country'"
-              optionLabel="country">
+              optionLabel="name">
             </p-multiSelect>
           </div>
 
@@ -108,7 +119,7 @@
             >
             <p-dropdown
               formControlName="subscriptionType"
-              [options]=""
+              [options]="subscription"
               [placeholder]="'Subscription Type'"
               optionLabel="">
             </p-dropdown>
@@ -203,7 +214,41 @@
       </div>
     </p-toolbar>
     <div class="card">
-      <smart-table [columns]="tableCols" [title]="tableTitle"></smart-table>
+      <!-- <smart-table [data]="clientsList$|async" [columns]="tableCols" [title]="tableTitle"></smart-table> -->
+    <p-table  [paginator]="true"  lazyMode="true" lazy="true" [rows]="10"
+    [totalRecords]="" [rowsPerPageOptions]="[10,20,50,100,500]"
+    currentPageReportTemplate="" [showCurrentPageReport]="true" #dt
+    [value]="clientsDetails$|async" dataKey="stock_id"
+    [resizableColumns]="true" [autoLayout]="true" styleClass="p-datatable-sm p-datatable-striped" [scrollable]="true"
+    scrollHeight="400px">
+     <ng-template pTemplate="caption">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+            <ng-container>{{tableTitle}}</ng-container>
+        </div>
+    </ng-template>
+ <ng-template pTemplate="header" let columns>
+        <tr >
+            <th *ngFor="let col of tableCols">{{col.header}}</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+        <tr >
+          <td>{{rowData.client?.id}}</td>
+          <td>{{rowData.client?.client?.client_name}}</td>
+          <td>{{rowData.client?.mobile}}</td>
+          <td>Email</td>
+          <td>Business name</td>
+          <td>Code</td>
+          <td>
+              <button type="button" pButton pRipple
+                  class="p-button-text p-button-rounded p-button-plain"
+                  [icon]="'pi pi-chevron-right'"></button>
+          </td>
+            <td>{{rowData.branchesNumber}}</td>
+            <td>{{rowData.deviceNumber}}</td>
+        </tr>
+    </ng-template>
+    </p-table>
     </div>
   </div>
 </div>
