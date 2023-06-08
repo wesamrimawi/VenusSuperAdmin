@@ -45,7 +45,7 @@
               placeholder="To Date">
             </p-calendar>
           </div>
-           <div class="col-12 md:col-4">
+          <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Clients</label>
             <p-multiSelect
               appendTo="body"
@@ -53,7 +53,7 @@
               [defaultLabel]="'Clients'"
               display="chip"
               optionLabel="client_name"
-              [options]="clientsList$|async"
+              [options]="clientsList$ | async"
               optionValue="id">
             </p-multiSelect>
           </div>
@@ -61,7 +61,7 @@
           <div class="field col-12 md:col-4">
             <label class="model-label model-label-form">Business Type</label>
             <p-multiSelect
-              [options]="allBusinessTypes$|async"
+              [options]="allBusinessTypes$ | async"
               [defaultLabel]="'Business type'"
               optionLabel="name"
               optionValue="id"
@@ -77,7 +77,7 @@
               [defaultLabel]="'Tag'"
               optionLabel="name"
               display="chip"
-              [options]="allMainTags$|async"
+              [options]="allMainTags$ | async"
               optionValue="id">
             </p-multiSelect>
           </div>
@@ -86,9 +86,10 @@
             <p-multiSelect
               appendTo="body"
               formControlName="subTag"
-             [defaultLabel]="'Sub Tag'"
-              [options]="subTags$|async"
-              optionValue="name">
+              [defaultLabel]="'Sub Tag'"
+              [options]="subTags$ | async"
+              optionLabel="name"
+              optionValue="id">
             </p-multiSelect>
           </div>
           <div class="col-12 md:col-4">
@@ -99,7 +100,7 @@
               [defaultLabel]="'Plans'"
               display="chip"
               optionLabel="plan_name"
-              [options]="allPlans$|async"
+              [options]="allPlans$ | async"
               optionValue="plan_id">
             </p-multiSelect>
           </div>
@@ -107,7 +108,7 @@
             <label class="model-label model-label-form">Country</label>
             <p-multiSelect
               formControlName="country"
-              [options]="allCounties$|async"
+              [options]="allCounties$ | async"
               [placeholder]="'Country'"
               optionLabel="name">
             </p-multiSelect>
@@ -128,43 +129,43 @@
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Creation Date</label>
             <p-calendar
-            appendTo="body"
-            formControlName="creationDate"
-            formControlName="toDate"
-            [showSeconds]="true"
-            class="mr-1"
-            dateFormat="yy-mm-dd"
-            styleClass="{'width':'100%'}"
-            placeholder="Creation Date">
-          </p-calendar>
-        </div>
-        <div class="col-12 md:col-4">
-          <label class="model-label model-label-form">Activation Date</label>
-          <p-calendar
-          appendTo="body"
-          formControlName="activationDate"
-          dateFormat="yy-mm-dd"
-          [showSeconds]="true"
-          class="mr-1"
-          dateFormat="yy-mm-dd"
-          styleClass="{'width':'100%'}"
-          placeholder="Activation Date">
-        </p-calendar>
-      </div>
-      <div class="col-12 md:col-4">
-        <label class="model-label model-label-form">Expiry Date</label>
-        <p-calendar
-          appendTo="body"
-          formControlName="expiryDate"
-          dateFormat="yy-mm-dd"
-          [showSeconds]="true"
-          class="mr-1"
-          dateFormat="yy-mm-dd"
-          styleClass="{'width':'100%'}"
-          placeholder="Expiry Date">
-        </p-calendar>
-      </div>
-      <div class="col-12 md:col-4">
+              appendTo="body"
+              formControlName="creationDate"
+              formControlName="toDate"
+              [showSeconds]="true"
+              class="mr-1"
+              dateFormat="yy-mm-dd"
+              styleClass="{'width':'100%'}"
+              placeholder="Creation Date">
+            </p-calendar>
+          </div>
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Activation Date</label>
+            <p-calendar
+              appendTo="body"
+              formControlName="activationDate"
+              dateFormat="yy-mm-dd"
+              [showSeconds]="true"
+              class="mr-1"
+              dateFormat="yy-mm-dd"
+              styleClass="{'width':'100%'}"
+              placeholder="Activation Date">
+            </p-calendar>
+          </div>
+          <div class="col-12 md:col-4">
+            <label class="model-label model-label-form">Expiry Date</label>
+            <p-calendar
+              appendTo="body"
+              formControlName="expiryDate"
+              dateFormat="yy-mm-dd"
+              [showSeconds]="true"
+              class="mr-1"
+              dateFormat="yy-mm-dd"
+              styleClass="{'width':'100%'}"
+              placeholder="Expiry Date">
+            </p-calendar>
+          </div>
+          <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Code</label>
             <input
               pInputText
@@ -215,40 +216,120 @@
     </p-toolbar>
     <div class="card">
       <!-- <smart-table [data]="clientsList$|async" [columns]="tableCols" [title]="tableTitle"></smart-table> -->
-    <p-table  [paginator]="true"  lazyMode="true" lazy="true" [rows]="10"
-    [totalRecords]="" [rowsPerPageOptions]="[10,20,50,100,500]"
-    currentPageReportTemplate="" [showCurrentPageReport]="true" #dt
-    [value]="clientsDetails$|async" dataKey="stock_id"
-    [resizableColumns]="true" [autoLayout]="true" styleClass="p-datatable-sm p-datatable-striped" [scrollable]="true"
-    scrollHeight="400px">
-     <ng-template pTemplate="caption">
-        <div class="flex justify-content-between flex-column sm:flex-row">
-            <ng-container>{{tableTitle}}</ng-container>
-        </div>
-    </ng-template>
- <ng-template pTemplate="header" let columns>
-        <tr >
-            <th *ngFor="let col of tableCols">{{col.header}}</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData>
-        <tr >
-          <td>{{rowData.client?.id}}</td>
-          <td>{{rowData.client?.client?.client_name}}</td>
-          <td>{{rowData.client?.mobile}}</td>
-          <td>Email</td>
-          <td>Business name</td>
-          <td>Code</td>
-          <td>
-              <button type="button" pButton pRipple
-                  class="p-button-text p-button-rounded p-button-plain"
-                  [icon]="'pi pi-chevron-right'"></button>
-          </td>
-            <td>{{rowData.branchesNumber}}</td>
-            <td>{{rowData.client?.devices?.length}}</td>
-        </tr>
-    </ng-template>
-    </p-table>
+      <p-table
+        #dt
+        [value]="clientsDetails$ | async"
+        dataKey="client.id"
+        [resizableColumns]="true"
+        [autoLayout]="true"
+        styleClass="p-datatable-sm p-datatable-striped"
+        [scrollable]="true"
+        scrollHeight="500px">
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-between flex-column sm:flex-row">
+            <ng-container>{{ tableTitle }}</ng-container>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let columns>
+          <tr>
+            <th *ngFor="let col of tableCols">{{ col.header }}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded">
+          <tr>
+            <td>{{ rowData.client?.id }}</td>
+            <td>{{ rowData.client?.client_name }}</td>
+            <td>{{ rowData.client?.mobile }}</td>
+            <td>{{ rowData.client?.email }}</td>
+            <td class="has-span">
+              <span *ngFor="let store of rowData.client.stores">{{
+                store.store_name
+              }}</span>
+            </td>
+            <td class="has-span">
+              <span *ngFor="let store of rowData.client.stores">{{
+                store.code
+              }}</span>
+            </td>
+            <td>
+              <button
+                type="button"
+                pButton
+                pRipple
+                [pRowToggler]="rowData"
+                class="p-button-text p-button-rounded p-button-plain"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+                ></button>
+            </td>
+            <td>{{ rowData.branchesNumber }}</td>
+            <td>{{ rowData.deviceNumber }}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-rowData>
+          <tr>
+            <td colspan="14">
+              <div class="p-3">
+                <p-table [value]="rowData.client.stores" dataKey="id">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>Branch Name</th>
+                      <th>Devices Number</th>
+                      <th>Creation Date</th>
+                      <th>Activation Date</th>
+                      <th>Expiration Date</th>
+                      <th>Tag</th>
+                      <th>Sub Tag</th>
+                      <th>Business type</th>
+                      <th>Plan</th>
+                      <th>Subscription</th>
+                      <th>Country</th>
+                      <th>Status</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-store>
+                    <ng-container *ngFor="let branch of store.branches">
+                    <tr>
+                        <td>{{branch.branch_name}}</td>
+                        <td>{{branch.devices?.length}}</td>
+                        <td>{{branch.created_at | date}}</td>
+                        <td>{{branch.activation_date | date}}</td>
+                        <td>{{branch.expiry_date | date}}</td>
+                        <td>{{branch?.mainTag.name}}</td>
+                        <td>{{branch.subTag.name}}</td>
+                        <td>{{branch.businessType.name}}</td>
+                        <td>{{branch.plan.plan_name}}</td>
+                        <td>{{branch.subscriptionType}}</td>
+                        <td>{{branch.address}}</td>
+                        <td>{{branch.status}}</td>
+                      </tr>
+                      </ng-container>
+                      <!-- <td>{{store.code}}</td> -->
+                      <!-- <td>{{ order.id }}</td>
+                      <td>{{ order.customer }}</td>
+                      <td>{{ order.id }}</td>
+                      <td>{{ order.amount | currency : "USD" }}</td>
+                      <td>
+                        <p-tag
+                          [value]="order.status"
+                          [severity]="getStatusSeverity(order.status)"></p-tag>
+                      </td>
+                      <td>
+                        <p-button type="button" icon="pi pi-plus"></p-button>
+                      </td> -->
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="6">
+                        There are no order for this product yet.
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
   </div>
 </div>

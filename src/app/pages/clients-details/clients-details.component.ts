@@ -32,9 +32,10 @@ export class ClientsDetailsComponent implements OnInit {
   subTags$: Observable<Tag[] | any> = of([]);
   clientsList$: Observable<Client[] | any> = of([]);
   clientsDetails$: Observable<any[] | any> = of([]);
-  clients
+  clients;
   limit: number = 10;
   offset: number = 0;
+  branchesList$: Observable<any[] | any> = of([]);
   constructor(
     private _translate: TranslateService,
     private _fb: FormBuilder,
@@ -53,7 +54,8 @@ export class ClientsDetailsComponent implements OnInit {
     this.loadAllTag();
     this.loadAllPlans();
     this.loadAllClients();
-    this.getClientsDetails()
+    this.getClientsDetails();
+    this.loadAllBranches()
   }
 
   private initTableColsHeader = (): void => {
@@ -94,7 +96,7 @@ export class ClientsDetailsComponent implements OnInit {
 
   getClientsDetails() {
     this._apiService.apiName = "clients/details";
-    this._apiService.options ={limit:100, offset: this.offset}
+    this._apiService.options = { limit: 100, offset: this.offset };
     const tableBody = {
       clients: null,
       businessType: null,
@@ -108,11 +110,13 @@ export class ClientsDetailsComponent implements OnInit {
       activationDate: "",
       code: null,
     };
-    this.clientsDetails$ = this._apiService.add(tableBody).pipe(map((resp) => {
-      console.log(resp.data.clientLists)
-      this.clients = resp.data.clientLists
-      return resp.error_code === 0 && resp.data.clientLists;
-    }))
+    this.clientsDetails$ = this._apiService.add(tableBody).pipe(
+      map((resp) => {
+        console.log(resp.data.clientLists);
+        this.clients = resp.data.clientLists;
+        return resp.error_code === 0 && resp.data.clientLists;
+      })
+    );
   }
 
   private loadDateTimeOptions() {
@@ -125,7 +129,6 @@ export class ClientsDetailsComponent implements OnInit {
       { label: "Last Week" },
       { label: "Last Month" },
       { label: "Last Year" },
-      { label: "Customzie" },
     ];
   }
 
@@ -156,16 +159,25 @@ export class ClientsDetailsComponent implements OnInit {
 
   getSubTagById = (id: any): void => {
     this._apiService.apiName = `tags/${id}/subtags`;
-    this.subTags$ = this._apiService
-      .getAll()
-      .pipe(map((resp) => resp.error_code === 0 && resp.data));
+    this.subTags$ = this._apiService.getAll().pipe(
+      map((resp) => {
+        console.log(resp.data);
+        return resp.error_code === 0 && resp.data;
+      })
+    );
   };
 
   private loadAllTag = (): void => {
     this._apiService.apiName = "tags/all";
-    this.allMainTags$ = this._apiService
-      .getAll()
-      .pipe(map((resp) => resp.error_code === 0 && resp.data));
+    this.allMainTags$ = this._apiService.getAll().pipe(
+      map((resp) => {
+        resp.data.map((tag) => {
+          // console.log(tag.id)
+          return this.getSubTagById(tag.id);
+        });
+        return resp.error_code === 0 && resp.data;
+      })
+    );
   };
 
   private loadAllPlans = (): void => {
@@ -173,5 +185,14 @@ export class ClientsDetailsComponent implements OnInit {
     this.allPlans$ = this._apiService
       .getAll()
       .pipe(map((resp) => resp.error_code === 0 && resp.data));
+  };
+  private loadAllBranches = (): void => {
+    this._apiService.apiName = "clients/branches";
+    this.branchesList$ = this._apiService
+      .getAll()
+      .pipe(map((resp) => {
+        console.log(resp.data)
+        return resp.error_code === 0 && resp.data
+      }));
   };
 }
