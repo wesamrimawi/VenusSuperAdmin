@@ -7,49 +7,10 @@
       <div class="container-fluid mt-2">
         <div class="grid p-fluid">
           <div class="col-12 md:col-4">
-            <label class="model-label model-label-form">Date Time Option</label>
-            <p-dropdown
-              [options]="dateTimeOptions"
-              appendTo="body"
-              optionLabel="label"
-              optionValue="value"
-              formControlName="datetTimeOptions"></p-dropdown>
-          </div>
-
-          <div class="col-12 md:col-4">
-            <label class="model-label model-label-form">From Date</label>
-            <p-calendar
-              appendTo="body"
-              dateFormat="yy-mm-dd"
-              formControlName="fromDate"
-              [showSeconds]="true"
-              appendTo="body"
-              class="mr-1"
-              dateFormat="yy-mm-dd"
-              styleClass="{'width':'100%'}"
-              placeholder="From Date">
-            </p-calendar>
-          </div>
-
-          <div class="col-12 md:col-4">
-            <label class="model-label model-label-form">To Date</label>
-            <p-calendar
-              appendTo="body"
-              dateFormat="yy-mm-dd"
-              formControlName="toDate"
-              [showSeconds]="true"
-              appendTo="body"
-              class="mr-1"
-              dateFormat="yy-mm-dd"
-              styleClass="{'width':'100%'}"
-              placeholder="To Date">
-            </p-calendar>
-          </div>
-          <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Clients</label>
             <p-multiSelect
               appendTo="body"
-              formControlName="plan"
+              formControlName="clients"
               [defaultLabel]="'Clients'"
               display="chip"
               optionLabel="client_name"
@@ -101,7 +62,7 @@
               display="chip"
               optionLabel="plan_name"
               [options]="allPlans$ | async"
-              optionValue="plan_id">
+              optionValue="id">
             </p-multiSelect>
           </div>
           <div class="col-12 md:col-4">
@@ -110,7 +71,8 @@
               formControlName="country"
               [options]="allCounties$ | async"
               [placeholder]="'Country'"
-              optionLabel="name">
+              optionLabel="name"
+              optionValue="id">
             </p-multiSelect>
           </div>
 
@@ -129,10 +91,10 @@
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Creation Date</label>
             <p-calendar
+              [showTime]="true"
+              [showSeconds]="true"
               appendTo="body"
               formControlName="creationDate"
-              formControlName="toDate"
-              [showSeconds]="true"
               class="mr-1"
               dateFormat="yy-mm-dd"
               styleClass="{'width':'100%'}"
@@ -143,11 +105,11 @@
             <label class="model-label model-label-form">Activation Date</label>
             <p-calendar
               appendTo="body"
+              [showTime]="true"
+              [showSeconds]="true"
               formControlName="activationDate"
               dateFormat="yy-mm-dd"
-              [showSeconds]="true"
               class="mr-1"
-              dateFormat="yy-mm-dd"
               styleClass="{'width':'100%'}"
               placeholder="Activation Date">
             </p-calendar>
@@ -156,11 +118,11 @@
             <label class="model-label model-label-form">Expiry Date</label>
             <p-calendar
               appendTo="body"
+              [showTime]="true"
+              [showSeconds]="true"
               formControlName="expiryDate"
               dateFormat="yy-mm-dd"
-              [showSeconds]="true"
               class="mr-1"
-              dateFormat="yy-mm-dd"
               styleClass="{'width':'100%'}"
               placeholder="Expiry Date">
             </p-calendar>
@@ -181,13 +143,13 @@
             <span class="p-buttonset">
               <p-button
                 icon="pi pi-times"
-                (onClick)="reportsFilter.hide()"
+                (onClick)="resetFrom(); reportsFilter.hide()"
                 styleClass="p-button-danger"
                 [label]="'Reset'">
               </p-button>
               <p-button
                 [label]="'Filter'"
-                (onClick)="reportsFilter.hide()"
+                (onClick)="submit(filterForm.value); reportsFilter.hide()"
                 type="button"
                 icon="pi pi-filter"
                 styleClass="p-button-primary">
@@ -258,8 +220,9 @@
                 pRipple
                 [pRowToggler]="rowData"
                 class="p-button-text p-button-rounded p-button-plain"
-                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
-                ></button>
+                [icon]="
+                  expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                "></button>
             </td>
             <td>{{ rowData.branchesNumber }}</td>
             <td>{{ rowData.deviceNumber }}</td>
@@ -268,7 +231,7 @@
         <ng-template pTemplate="rowexpansion" let-rowData>
           <tr>
             <td colspan="14">
-              <div class="p-3">
+              <div class="">
                 <p-table [value]="rowData.client.stores" dataKey="id">
                   <ng-template pTemplate="header">
                     <tr>
@@ -288,34 +251,21 @@
                   </ng-template>
                   <ng-template pTemplate="body" let-store>
                     <ng-container *ngFor="let branch of store.branches">
-                    <tr>
-                        <td>{{branch.branch_name}}</td>
-                        <td>{{branch.devices?.length}}</td>
-                        <td>{{branch.created_at | date}}</td>
-                        <td>{{branch.activation_date | date}}</td>
-                        <td>{{branch.expiry_date | date}}</td>
-                        <td>{{branch?.mainTag.name}}</td>
-                        <td>{{branch.subTag.name}}</td>
-                        <td>{{branch.businessType.name}}</td>
-                        <td>{{branch.plan.plan_name}}</td>
-                        <td>{{branch.subscriptionType}}</td>
-                        <td>{{branch.address}}</td>
-                        <td>{{branch.status}}</td>
+                      <tr>
+                        <td>{{ branch.branch_name }}</td>
+                        <td>{{ branch.devices?.length }}</td>
+                        <td>{{ branch.created_at | date }}</td>
+                        <td>{{ branch.activation_date | date }}</td>
+                        <td>{{ branch.expiry_date | date }}</td>
+                        <td>{{ branch?.mainTag.name }}</td>
+                        <td>{{ branch.subTag.name }}</td>
+                        <td>{{ branch.businessType.name }}</td>
+                        <td>{{ branch.plan.plan_name }}</td>
+                        <td>{{ branch.subscriptionType }}</td>
+                        <td>{{ branch.address }}</td>
+                        <td>{{ branch.status }}</td>
                       </tr>
-                      </ng-container>
-                      <!-- <td>{{store.code}}</td> -->
-                      <!-- <td>{{ order.id }}</td>
-                      <td>{{ order.customer }}</td>
-                      <td>{{ order.id }}</td>
-                      <td>{{ order.amount | currency : "USD" }}</td>
-                      <td>
-                        <p-tag
-                          [value]="order.status"
-                          [severity]="getStatusSeverity(order.status)"></p-tag>
-                      </td>
-                      <td>
-                        <p-button type="button" icon="pi pi-plus"></p-button>
-                      </td> -->
+                    </ng-container>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">
                     <tr>
@@ -330,6 +280,23 @@
           </tr>
         </ng-template>
       </p-table>
+      <div class="totals">
+      <span class="block text-500 font-medium mt-1"
+        >&nbsp;Total Branches &nbsp;:&nbsp;<span>{{
+          totals$?.branches
+        }}</span></span
+      >
+      <span class="block text-500 font-medium mt-1"
+        >&nbsp;Total clients &nbsp;:&nbsp;<span>{{
+          totals$?.clients
+        }}</span></span
+      >
+      <span class="block text-500 font-medium mt-1"
+        >&nbsp;Total Devices &nbsp;:&nbsp;<span>{{
+          totals$?.devices
+        }}</span></span
+      >
+    </div>
     </div>
   </div>
 </div>

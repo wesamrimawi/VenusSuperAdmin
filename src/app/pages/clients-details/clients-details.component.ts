@@ -11,6 +11,7 @@ import { SelectItem } from 'primeng/api';
 import { Observable, of } from 'rxjs';
 import { map } from "rxjs/operators";
 import { Client } from 'src/app/models/client.model';
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-clients-details",
@@ -32,14 +33,15 @@ export class ClientsDetailsComponent implements OnInit {
   subTags$: Observable<Tag[] | any> = of([]);
   clientsList$: Observable<Client[] | any> = of([]);
   clientsDetails$: Observable<any[] | any> = of([]);
-  clients;
+  totals$
+  filterBody;
   limit: number = 10;
   offset: number = 0;
-  branchesList$: Observable<any[] | any> = of([]);
   constructor(
     private _translate: TranslateService,
     private _fb: FormBuilder,
-    private _apiService: ApiService
+    private _apiService: ApiService,
+    public _datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +49,6 @@ export class ClientsDetailsComponent implements OnInit {
       ([key, value]) => ({ label: key, value: value })
     );
     this.initTableColsHeader();
-    this.loadDateTimeOptions();
     this.initFilterForm();
     this.loadAllBusinessTypes();
     this.loadAllCounties();
@@ -55,7 +56,6 @@ export class ClientsDetailsComponent implements OnInit {
     this.loadAllPlans();
     this.loadAllClients();
     this.getClientsDetails();
-    this.loadAllBranches()
   }
 
   private initTableColsHeader = (): void => {
@@ -78,18 +78,16 @@ export class ClientsDetailsComponent implements OnInit {
 
   private initFilterForm() {
     this.filterForm = this._fb.group({
-      dateTimeOptions: [""],
-      fromDate: [""],
-      toDate: [""],
+      clients: [],
       businessType: [],
-      Tag: [],
+      tag: [],
       subTag: [],
       plan: [],
       country: [],
-      subscriptionType: [],
+      subscriptionType: [""],
       expiryDate: [""],
       creationDate: [""],
-      activationDay: [""],
+      activationDate: [""],
       code: [""],
     });
   }
@@ -108,36 +106,79 @@ export class ClientsDetailsComponent implements OnInit {
       expiryDate: "",
       creationDate: "",
       activationDate: "",
-      code: null,
+      code: "",
     };
-    this.clientsDetails$ = this._apiService.add(tableBody).pipe(
+    this.loadClientList(tableBody);
+  }
+
+  private loadClientList(body) {
+    this.clientsDetails$ = this._apiService.add(body).pipe(
       map((resp) => {
-        console.log(resp.data.clientLists);
-        this.clients = resp.data.clientLists;
+        this.totals$ = resp.data.totals
         return resp.error_code === 0 && resp.data.clientLists;
       })
     );
   }
 
-  private loadDateTimeOptions() {
-    this.dateTimeOptions = [
-      { label: "Today" },
-      { label: "This Week" },
-      { label: "This Month" },
-      { label: "This Year" },
-      { label: "Yesterday" },
-      { label: "Last Week" },
-      { label: "Last Month" },
-      { label: "Last Year" },
-    ];
+  submit = (formValues: any): void => {
+    this._apiService.apiName = "clients/details";
+    this._apiService.options = { limit: 100, offset: this.offset };
+    if (this.filterForm.invalid) {
+      return;
+    }
+
+    this.filterBody = {
+      clients: formValues?.clients ? formValues.clients : null,
+      businessType: formValues?.businessType ? formValues.businessType : null,
+      tag: formValues?.tag ? formValues.tag : null,
+      subTag: formValues?.subTag ? formValues.subTag : null,
+      plan: formValues?.plan ? formValues.plan : null,
+      country: formValues?.country ? formValues.country : null,
+      subscriptionType: formValues?.subscriptionType
+        ? formValues.subscriptionType
+        : "",
+      creationDate: formValues?.creationDate
+        ? (formValues.creationDate = new Date(
+            formValues.creationDate
+          ).toISOString())
+        : "",
+      activationDate: formValues?.activationDate
+        ? (formValues.activationDate = new Date(
+            formValues.activationDate
+          ).toISOString())
+        : "",
+      expiryDate: formValues?.expiryDate
+        ? (formValues.expiryDate = new Date(
+            formValues.expiryDate
+          ).toISOString())
+        : "",
+      code: formValues?.code ? formValues.code : "",
+    };
+    // return;
+    console.log(this.filterForm.value)
+    this.loadClientList(this.filterBody);
+    this.initFilterForm()
+  };
+
+  resetFrom() {
+    this.getClientsDetails();
+    this.filterForm.controls["clients"].setValue([]);
+    this.filterForm.controls["businessType"].setValue([]);
+    this.filterForm.controls["tag"].setValue([]);
+    this.filterForm.controls["subTag"].setValue([]);
+    this.filterForm.controls["plan"].setValue([]);
+    this.filterForm.controls["country"].setValue([]);
+    this.filterForm.controls["subscriptionType"].setValue([]);
+    this.filterForm.controls["creationDate"].setValue("");
+    this.filterForm.controls["activationDate"].setValue("");
+    this.filterForm.controls["expiryDate"].setValue("");
+    this.filterForm.controls["code"].setValue(null);
   }
 
   private loadAllClients = (): void => {
     this._apiService.apiName = "clients";
     this.clientsList$ = this._apiService.getAll().pipe(
       map((resp) => {
-        console.log(resp.data);
-        // this.clients = resp.data;
         return resp.error_code === 0 && resp.data;
       })
     );
@@ -161,7 +202,6 @@ export class ClientsDetailsComponent implements OnInit {
     this._apiService.apiName = `tags/${id}/subtags`;
     this.subTags$ = this._apiService.getAll().pipe(
       map((resp) => {
-        console.log(resp.data);
         return resp.error_code === 0 && resp.data;
       })
     );
@@ -185,14 +225,5 @@ export class ClientsDetailsComponent implements OnInit {
     this.allPlans$ = this._apiService
       .getAll()
       .pipe(map((resp) => resp.error_code === 0 && resp.data));
-  };
-  private loadAllBranches = (): void => {
-    this._apiService.apiName = "clients/branches";
-    this.branchesList$ = this._apiService
-      .getAll()
-      .pipe(map((resp) => {
-        console.log(resp.data)
-        return resp.error_code === 0 && resp.data
-      }));
   };
 }

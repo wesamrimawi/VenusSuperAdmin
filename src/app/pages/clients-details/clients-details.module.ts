@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { SmartTableModule } from "./../../core/smart-table/smart-table.module";
 import { ClientsDetailsRoutingModule } from "./clients-details-routing.module";
 import { ClientsDetailsComponent } from "./clients-details.component";
@@ -12,6 +12,7 @@ import { CalendarModule } from "primeng/calendar";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { InputTextModule } from "primeng/inputtext";
 import { TableModule } from "primeng/table";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [ClientsDetailsComponent],
@@ -27,7 +28,9 @@ import { TableModule } from "primeng/table";
     CalendarModule,
     SelectButtonModule,
     InputTextModule,
-    TableModule
+    TableModule,
+    ReactiveFormsModule
   ],
+  providers: [DatePipe],
 })
 export class ClientsDetailsModule {}
