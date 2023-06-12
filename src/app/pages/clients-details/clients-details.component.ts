@@ -1,4 +1,4 @@
-import { SubscriptionType } from './../../enum/subscription-type.enum';
+import { SubscriptionType } from "./../../enum/subscription-type.enum";
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
@@ -6,12 +6,13 @@ import { ApiService } from "src/app/shared/services/api.service";
 import { Status } from "src/app/enum/status.enum";
 import { Plan } from "src/app/models/plan.model";
 import { Countries } from "src/app/models/countries.model";
-import { Tag } from 'src/app/models/tag.model';
-import { SelectItem } from 'primeng/api';
-import { Observable, of } from 'rxjs';
+import { Tag } from "src/app/models/tag.model";
+import { SelectItem } from "primeng/api";
+import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
-import { Client } from 'src/app/models/client.model';
+import { Client } from "src/app/models/client.model";
 import { DatePipe } from "@angular/common";
+
 
 @Component({
   selector: "app-clients-details",
@@ -33,7 +34,9 @@ export class ClientsDetailsComponent implements OnInit {
   subTags$: Observable<Tag[] | any> = of([]);
   clientsList$: Observable<Client[] | any> = of([]);
   clientsDetails$: Observable<any[] | any> = of([]);
-  totals$
+  disableSubTag: boolean = true
+  tagId;
+  totals$;
   filterBody;
   limit: number = 10;
   offset: number = 0;
@@ -114,7 +117,7 @@ export class ClientsDetailsComponent implements OnInit {
   private loadClientList(body) {
     this.clientsDetails$ = this._apiService.add(body).pipe(
       map((resp) => {
-        this.totals$ = resp.data.totals
+        this.totals$ = resp.data.totals;
         return resp.error_code === 0 && resp.data.clientLists;
       })
     );
@@ -138,26 +141,25 @@ export class ClientsDetailsComponent implements OnInit {
         ? formValues.subscriptionType
         : "",
       creationDate: formValues?.creationDate
-        ? (formValues.creationDate = new Date(
-            formValues.creationDate
-          ).toISOString())
+        ? (formValues.creationDate = this._datePipe.transform(
+            formValues.creationDate,
+            "yyyy/MM/dd"
+          ))
         : "",
       activationDate: formValues?.activationDate
-        ? (formValues.activationDate = new Date(
-            formValues.activationDate
-          ).toISOString())
+        ? formValues.activationDate= this._datePipe.transform(
+            formValues.activationDate,
+            "yyyy/MM/dd"
+          )
         : "",
       expiryDate: formValues?.expiryDate
-        ? (formValues.expiryDate = new Date(
-            formValues.expiryDate
-          ).toISOString())
+        ? formValues.expiryDate =  this._datePipe.transform(formValues.expiryDate, "yyyy/MM/dd")
         : "",
       code: formValues?.code ? formValues.code : "",
     };
     // return;
-    console.log(this.filterForm.value)
     this.loadClientList(this.filterBody);
-    this.initFilterForm()
+    this.initFilterForm();
   };
 
   resetFrom() {
@@ -199,6 +201,7 @@ export class ClientsDetailsComponent implements OnInit {
   };
 
   getSubTagById = (id: any): void => {
+
     this._apiService.apiName = `tags/${id}/subtags`;
     this.subTags$ = this._apiService.getAll().pipe(
       map((resp) => {
@@ -207,14 +210,21 @@ export class ClientsDetailsComponent implements OnInit {
     );
   };
 
+  onChange(formValue) {
+    this.tagId = formValue.value.tag
+    this.getSubTagById(this.tagId)
+    if (this.tagId === '') {
+      this.disableSubTag = true
+    } else {
+
+      this.disableSubTag = false
+    }
+  }
+
   private loadAllTag = (): void => {
     this._apiService.apiName = "tags/all";
     this.allMainTags$ = this._apiService.getAll().pipe(
       map((resp) => {
-        resp.data.map((tag) => {
-          // console.log(tag.id)
-          return this.getSubTagById(tag.id);
-        });
         return resp.error_code === 0 && resp.data;
       })
     );

@@ -32,26 +32,28 @@
 
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Tag</label>
-            <p-multiSelect
+            <p-dropdown
+            (onChange)="onChange(filterForm)"
               appendTo="body"
               formControlName="tag"
-              [defaultLabel]="'Tag'"
+              [placeholder]="'Tag'"
               optionLabel="name"
               display="chip"
               [options]="allMainTags$ | async"
               optionValue="id">
-            </p-multiSelect>
+            </p-dropdown>
           </div>
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Sub Tag</label>
-            <p-multiSelect
+            <p-dropdown
+              [disabled]="disableSubTag"
               appendTo="body"
               formControlName="subTag"
-              [defaultLabel]="'Sub Tag'"
+              [placeholder]="'Sub Tag'"
               [options]="subTags$ | async"
               optionLabel="name"
               optionValue="id">
-            </p-multiSelect>
+            </p-dropdown>
           </div>
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Plan</label>
@@ -91,8 +93,7 @@
           <div class="col-12 md:col-4">
             <label class="model-label model-label-form">Creation Date</label>
             <p-calendar
-              [showTime]="true"
-              [showSeconds]="true"
+              
               appendTo="body"
               formControlName="creationDate"
               class="mr-1"
@@ -105,8 +106,7 @@
             <label class="model-label model-label-form">Activation Date</label>
             <p-calendar
               appendTo="body"
-              [showTime]="true"
-              [showSeconds]="true"
+           
               formControlName="activationDate"
               dateFormat="yy-mm-dd"
               class="mr-1"
@@ -118,8 +118,7 @@
             <label class="model-label model-label-form">Expiry Date</label>
             <p-calendar
               appendTo="body"
-              [showTime]="true"
-              [showSeconds]="true"
+          
               formControlName="expiryDate"
               dateFormat="yy-mm-dd"
               class="mr-1"
@@ -300,3 +299,4 @@
     </div>
   </div>
 </div>
+
